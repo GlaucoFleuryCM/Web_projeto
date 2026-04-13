@@ -22,7 +22,11 @@ const MainContent = styled.div`
     margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
     padding-top: 80px;
     transition: margin-left 0.5s ease; 
-    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     min-height: 100vh;
     position: relative;
     overflow: hidden;
