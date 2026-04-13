@@ -1,86 +1,83 @@
-import React, { useEffect } from "react";
 import "./App.css";
+import React, { useState } from "react";
+import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
+import Topbar from "./components/Topbar";
 import {
     BrowserRouter as Router,
     Routes,
     Route,
 } from "react-router-dom";
 import {
-    AboutUs,
-    OurAim,
-    OurVision,
-} from "./pages/AboutUs";
-import {
-    Services,
-    ServicesOne,
-    ServicesTwo,
-    ServicesThree,
-} from "./pages/Services";
-import {
-    Events,
-    EventsOne,
-    EventsTwo,
-} from "./pages/Events";
-import {
-    DesenharFundo,
-} from "./pages/Fundo";
-import Contact from "./pages/ContactUs";
-import Support from "./pages/Support";
+    LogRecente,
+    LogGeral,
+} from "./pages/Logs";
+import Saida from "./pages/RegSaida";
+import Veiculos from "./pages/Veiculos";
+import Gerenciar from "./pages/Gerenciar";
+
+import logo from "./assets/logo.png";
+
+const MainContent = styled.div`
+    margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
+    padding-top: 80px;
+    transition: margin-left 0.5s ease; 
+    
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background-image: url(${logo});
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+
+        opacity: 0.5;
+        z-index: -1;
+        pointer-events: none;
+    }
+`;
+
 function App() {
+      const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
         <Router>
-            <Sidebar />
-            <Routes>
-                <Route
-                    path="/about-us"
-                    element={<AboutUs />}
-                />
-                <Route
-                    path="/about-us/aim"
-                    element={<OurAim />}
-                />
-                <Route
-                    path="/about-us/vision"
-                    element={<OurVision />}
-                />
-                <Route
-                    path="/services"
-                    element={<Services />}
-                />
-                <Route
-                    path="/services/services1"
-                    element={<ServicesOne />}
-                />
-                <Route
-                    path="/services/services2"
-                    element={<ServicesTwo />}
-                />
-                <Route
-                    path="/services/services3"
-                    element={<ServicesThree />}
-                />
-                <Route
-                    path="/contact"
-                    element={<Contact />}
-                />
-                <Route
-                    path="/events"
-                    element={<Events />}
-                />
-                <Route
-                    path="/events/events1"
-                    element={<EventsOne />}
-                />
-                <Route
-                    path="/events/events2"
-                    element={<EventsTwo />}
-                />
-                <Route
-                    path="/support"
-                    element={<Support />}
-                />
-            </Routes>
+            <Topbar />
+            <Sidebar 
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+            />
+
+            <MainContent sidebarOpen={sidebarOpen}>
+                <Routes>
+                    <Route
+                        path="/logs/recente"
+                        element={<LogRecente />}
+                    />
+                    <Route
+                        path="/logs/geral"
+                        element={<LogGeral />}
+                    />
+                    <Route
+                        path="/saida"
+                        element={<Saida />}
+                    />
+                    <Route
+                        path="/veiculos"
+                        element={<Veiculos />}
+                    />
+                    <Route
+                        path="/gerenciar"
+                        element={<Gerenciar />}
+                    />
+                </Routes>
+            </MainContent>
         </Router>
     );
 }

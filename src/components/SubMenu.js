@@ -1,22 +1,20 @@
-// Filename - components/SubMenu.js
-
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const SidebarLink = styled(Link)`
     display: flex;
-    color: #e1e9fc;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    list-style: none;
-    height: 60px;
-    text-decoration: none;
-    font-size: 18px;
+    width: 100%;
 
+    padding: 12px;
+    padding-left: 1.1rem;
+    text-decoration: none;
+    color: #e1e9fc;
+    
     &:hover {
-        background: #013185;
+        background: #0a4bbf;
         border-left: 4px solid green;
         cursor: pointer;
     }
@@ -24,17 +22,22 @@ const SidebarLink = styled(Link)`
 
 const SidebarLabel = styled.span`
     margin-left: 16px;
+    white-space: wrap;
+
+    opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+    transition: opacity 0.2s ease;
 `;
 
 const DropdownLink = styled(Link)`
     background: #013185;
-    height: 60px;
+    height: 50px;
+
     padding-left: 3rem;
     display: flex;
     align-items: center;
+
     text-decoration: none;
     color: #f5f5f5;
-    font-size: 18px;
 
     &:hover {
         background: green;
@@ -42,45 +45,50 @@ const DropdownLink = styled(Link)`
     }
 `;
 
-const SubMenu = ({ item }) => {
-    const [subnav, setSubnav] = useState(false);
+const IconWrapper = styled.div`
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+`;
 
+const SubMenu = ({ item, sidebarOpen }) => {
+    const [subnav, setSubnav] = useState(false);
     const showSubnav = () => setSubnav(!subnav);
+    
+    useEffect(() => {
+        if (!sidebarOpen) {
+            setSubnav(false);
+        }
+    }, [sidebarOpen]);
 
     return (
         <>
             <SidebarLink
-                to={item.path}
+                to={item.path || "#"}
                 onClick={item.subNav && showSubnav}
             >
-                <div>
-                    {item.icon}
-                    <SidebarLabel>
-                        {item.title}
-                    </SidebarLabel>
-                </div>
-                <div>
-                    {item.subNav && subnav
-                        ? item.iconOpened
-                        : item.subNav
-                        ? item.iconClosed
-                        : null}
-                </div>
+                <IconWrapper>{item.icon}</IconWrapper>
+
+                <SidebarLabel $visible={sidebarOpen}>
+                    {item.title}
+                </SidebarLabel>
+
+                {item.subNav && (
+                    <div style={{ marginLeft: "auto" }}>
+                        {subnav ? item.iconOpened : item.iconClosed}
+                    </div>
+                )}
             </SidebarLink>
+
             {subnav &&
-                item.subNav.map((item, index) => {
-                    return (
-                        <DropdownLink
-                            to={item.path}
-                            key={index}
-                        >
-                            {item.icon}
-                            <SidebarLabel>
-                                {item.title}
-                            </SidebarLabel>
-                        </DropdownLink>
-                    );
-                })}
+                item.subNav.map((subItem, index) => (
+                    <DropdownLink to={subItem.path} key={index}>
+                        <IconWrapper>{subItem.icon}</IconWrapper>
+                        <SidebarLabel $visible={sidebarOpen}>
+                            {subItem.title}
+                        </SidebarLabel>
+                    </DropdownLink>
+                ))}
         </>
     );
 };
