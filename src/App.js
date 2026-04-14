@@ -12,9 +12,9 @@ import {
     LogRecente,
     LogGeral,
 } from "./pages/Logs";
-import Saida from "./pages/RegSaida";
+import Saida from "./pages/Saida/RegSaida";
 import Veiculos from "./pages/Veiculos";
-import Gerenciar from "./pages/Gerenciar";
+import Gerenciar from "./pages/Gerenciar/Gerenciar";
 
 import logo from "./assets/logo.png";
 
