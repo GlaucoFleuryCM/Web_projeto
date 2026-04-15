@@ -14,7 +14,7 @@ import {
 } from "./pages/Logs/Logs.jsx";
 import Saida from "./pages/Saida/RegSaida";
 import Veiculos from "./pages/Veiculos";
-import Gerenciar from "./pages/Gerenciar";
+import Gerenciar from "./pages/Gerenciar/Gerenciar";
 
 import logo from "./assets/logo.png";
 

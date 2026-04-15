@@ -147,7 +147,7 @@ export const LogRecente = () => {
 
     return (
         <div className="log-recente">
-            <h1>Movimentações Recentes</h1>
+            <h1 className="page-title">Movimentações Recentes</h1>
             <div id="container-tabelas">
                 {registroAtivos.length !== 0 &&
                     (
@@ -253,7 +253,7 @@ export const LogGeral = () => {
     return (
         <div className="log-geral">
 
-            <h1>Todas Movimentações</h1>
+            <h1 className="page-title">Todas Movimentações</h1>
 
             <input
                 id="search-bar"
