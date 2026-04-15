@@ -92,6 +92,16 @@ const Saida = () => {
                 </div>
 
                 <div className="form-group">
+                    <label>Destino da viagem</label>
+                    <input
+                        type="text"
+                        placeholder="Digite o destino"
+                        className="form-field"
+                        id="destino" name="destino"
+                    ></input>
+                </div>
+
+                <div className="form-group">
                     <label>Estimativa de retorno:</label>
                     <DatePicker
                         selected={formData.retorno}
