@@ -68,6 +68,12 @@ table td {
     border: 1px solid black;
 }
 
+.log-recente {
+    width: 70%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .log-geral {
     width: 70%;
     padding: 20px;
