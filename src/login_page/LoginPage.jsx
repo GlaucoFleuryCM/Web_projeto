@@ -5,7 +5,7 @@ import { CiNoWaitingSign } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
-const LoginPage = () => {
+const LoginPage = ({setIsLoggedIn}) => {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
@@ -33,8 +33,8 @@ const LoginPage = () => {
         }
 
         // sucesso em validacao (s/erro)
-        setError("");
-        navigate("/");
+        setIsLoggedIn(true);  
+        navigate("/"); 
     };
 
     return (

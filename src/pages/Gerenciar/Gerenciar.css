@@ -95,3 +95,7 @@
 .delete-btn:hover {
     color: #ff0000;
 }
+
+button {
+    color: black;
+}

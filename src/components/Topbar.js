@@ -20,12 +20,15 @@ const Top = styled.div`
     z-index: 10;
 `;
 
-const Topbar = () => {
+const Topbar = ({ setIsLoggedIn}) => {
     return (
         <Top>
             <Link to="/login">
-                <figure>
-                    <FaDoorOpen fontSize={"40px"} color="white"  path="/login"/>
+                <figure
+                    onClick={() => setIsLoggedIn(false)} 
+                    style={{ cursor: "pointer" }}
+                >
+                    <FaDoorOpen fontSize={"40px"} color="white" />
                 </figure>
             </Link>
             <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", paddingLeft: "40px"}}>
