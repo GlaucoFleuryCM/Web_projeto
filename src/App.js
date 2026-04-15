@@ -11,7 +11,7 @@ import {
 import {
     LogRecente,
     LogGeral,
-} from "./pages/Logs";
+} from "./pages/Logs/Logs.jsx";
 import Saida from "./pages/RegSaida";
 import Veiculos from "./pages/Veiculos";
 import Gerenciar from "./pages/Gerenciar";
