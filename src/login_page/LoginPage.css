@@ -58,19 +58,19 @@
     justify-content: flex-end;
 }
 
-button {
+.login-container button {
     height: 6vh;
-    width: 12vw;
+    width: auto;
     padding: 10px 20px;
     border-radius: 6px;
     border: none;
     background-color: #001B69;
-    color: white;
+    color: #dddddd;
     cursor: pointer;
     font-size: 1.4rem;
 }
 
-button:hover {
+.login-container button:hover {
     background-color: #0056b3;
 }
 

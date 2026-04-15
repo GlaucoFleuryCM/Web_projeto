@@ -13,7 +13,7 @@ import {
     LogGeral,
 } from "./pages/Logs/Logs.jsx";
 import Saida from "./pages/Saida/RegSaida";
-import Veiculos from "./pages/Veiculos";
+import Veiculos from "./pages/Veiculos.jsx";
 import LoginPage from "./login_page/LoginPage";
 import { useLocation, Navigate } from "react-router-dom";
 import Gerenciar from "./pages/Gerenciar/Gerenciar";
@@ -32,21 +32,6 @@ const MainContent = styled.div`
     min-height: 100vh;
     position: relative;
     overflow: hidden;
-
-    &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-
-        background-image: url(${logo});
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
-
-        opacity: 0.5;
-        z-index: -1;
-        pointer-events: none;
-    }
 `;
 
 // wrapper: React needs to return only one component

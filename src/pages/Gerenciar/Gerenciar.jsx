@@ -7,19 +7,59 @@ const Gerenciar = () => {
     // 1 - Veículos
     // 2 - Motivos
     const [escopo, setEscopo] = useState(0);
+    const [motoristas, setMotoristas] = useState([]);
+    const [veiculos, setVeiculos] = useState([]);
+    const [motivos, setMotivos] = useState([]);
     
+    const [nome, setNome] = useState("");
+    const [placa, setPlaca] = useState("");
+    const [motivo, setMotivo] = useState("");
+
+    const handleSubmit0 = (e) => {
+        e.preventDefault();
+        setMotoristas([...motoristas, nome]);
+    };
+    const handleDelete0 = (index) => {
+        const novaLista = motoristas.filter((_, i) => i !== index);
+        setMotoristas(novaLista);
+    };
+    
+    const handleSubmit1 = (e) => {
+        e.preventDefault();
+        setVeiculos([...veiculos, placa]);
+    };
+    const handleDelete1 = (index) => {
+        const novaLista = veiculos.filter((_, i) => i !== index);
+        setVeiculos(novaLista);
+    };
+
+    const handleSubmit2 = (e) => {
+        e.preventDefault();
+        setMotivos([...motivos, motivo]);
+    };
+    const handleDelete2 = (index) => {
+        const novaLista = motivos.filter((_, i) => i !== index);
+        setMotivos(novaLista);
+    };
+
     return (
         <div className="gerenciar">
             <h1 className="page-title">Cadastrar ou Remover Itens</h1>
             <div className="categorias">
-                <button onClick={() => setEscopo(0)}>Motoristas</button>
-                <button onClick={() => setEscopo(1)}>Veículos</button>
-                <button onClick={() => setEscopo(2)}>Motivos</button>
+                <button 
+                    className={`categoria-btn ${escopo === 0 ? "active" : ""}`}
+                    onClick={() => setEscopo(0)}>Motoristas</button>
+                <button 
+                    className={`categoria-btn ${escopo === 1 ? "active" : ""}`}
+                    onClick={() => setEscopo(1)}>Veículos</button>
+                <button 
+                    className={`categoria-btn ${escopo === 2 ? "active" : ""}`}
+                    onClick={() => setEscopo(2)}>Motivos</button>
             </div> 
             
-            {escopo == 0 && (
+            {escopo === 0 && (
                 <div className="container">
-                    <form>
+                    <form onSubmit={handleSubmit0}>
                         <div className="form-group">
                             <label htmlFor="nome">*Nome:</label>
                             <input
@@ -27,6 +67,8 @@ const Gerenciar = () => {
                                 placeholder="..."
                                 className="form-field" required
                                 id="nome"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
                             >
                             </input>
                         </div>
@@ -54,7 +96,7 @@ const Gerenciar = () => {
                                 type="number"
                                 placeholder="..."
                                 className="form-field" required
-                                id="contato 1">
+                                id="contato1">
                             </input>
                         </div>
                         <div className="form-group">
@@ -63,7 +105,7 @@ const Gerenciar = () => {
                                 type="number"
                                 placeholder="..."
                                 className="form-field"
-                                id="contato 2">
+                                id="contato2">
                             </input>
                         </div>
 
@@ -73,72 +115,54 @@ const Gerenciar = () => {
                     <ul className="vizualização">
                         <li>
                             <span>Motorista 1</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
+                            <button className="delete-btn" onClick={() => {}}>
                                 &times;
                             </button>
                         </li>
                         <li>
                             <span>Motorista 2</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
+                            <button className="delete-btn" onClick={() => {}}>
                                 &times;
                             </button>
                         </li>
                         <li>
-                            <span>Motorsita 3</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
+                            <span>Motorista 3</span>
+                            <button className="delete-btn" onClick={() => {}}>
                                 &times;
                             </button>
                         </li>
                         <li>
                             <span>Motorista 4</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
+                            <button className="delete-btn" onClick={() => {}}>
                                 &times;
                             </button>
                         </li>
-                        <li>
-                            <span>Motorista 5</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorsita 6</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorista 7</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorista 8</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorsita 9</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
+                        {motoristas.map((m, i) => (
+                            <li key={i}>
+                                <span>{m}</span>
+                                <button 
+                                className="delete-btn"
+                                type="button" onClick={() => handleDelete0(i)}>
+                                    &times;
+                                </button>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
 
-            {escopo == 1 && (
+            {escopo === 1 && (
                 <div className="container">
-                    <form>
+                    <form onSubmit={handleSubmit1}>
                         <div className="form-group">
                             <label htmlFor="placa">*Placa</label>
                             <input
                                 type="text"
                                 placeholder="..."
                                 className="form-field" required
-                                id="placa">
+                                id="placa"
+                                value={placa}
+                                onChange={(e) => setPlaca(e.target.value)}>
                             </input>
                         </div>
                         <div className="form-group">
@@ -153,7 +177,7 @@ const Gerenciar = () => {
                         <div className="form-group">
                             <label htmlFor="ano">Ano</label>
                             <input
-                                type="numero"
+                                type="number"
                                 placeholder="..."
                                 className="form-field"
                                 id="ano">
@@ -171,7 +195,7 @@ const Gerenciar = () => {
                         <div className="form-group">
                             <label htmlFor="img">Imagem</label>
                             <input
-                                type="image"
+                                type="file"
                                 placeholder="..."
                                 className="form-field"
                                 id="img">
@@ -200,20 +224,32 @@ const Gerenciar = () => {
                                 &times;
                             </button>
                         </li>
+                        {veiculos.map((m, i) => (
+                            <li key={i}>
+                                <span>{m}</span>
+                                <button 
+                                className="delete-btn"
+                                type="button" onClick={() => handleDelete1(i)}>
+                                    &times;
+                                </button>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
 
-            {escopo == 2 && (
+            {escopo === 2 && (
                 <div className="container">
-                    <form>
+                    <form onSubmit={handleSubmit2}>
                         <div className="form-group">
                             <label htmlFor="motivo">*Motivo</label>
                             <input
                                 type="text"
                                 placeholder="..."
                                 className="form-field" required
-                                id="motivo">
+                                id="motivo"
+                                value={motivo}
+                                onChange={(e) => setMotivo(e.target.value)}>
                             </input>
                         </div>
 
@@ -240,6 +276,16 @@ const Gerenciar = () => {
                                 &times;
                             </button>
                         </li>
+                        {motivos.map((m, i) => (
+                            <li key={i}>
+                                <span>{m}</span>
+                                <button 
+                                className="delete-btn"
+                                type="button" onClick={() => handleDelete2(i)}>
+                                    &times;
+                                </button>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
