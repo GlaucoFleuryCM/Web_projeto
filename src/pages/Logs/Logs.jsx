@@ -4,135 +4,135 @@ import { useState } from "react";
 import './Logs.css'
 
 const registroUltimos10 = [
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-                                destino: "Birigui", data: "24/04/2026"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-                                destino: "Birigui", data: "23/04/2026"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-                                destino: "Birigui", data: "22/04/2026"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-                                destino: "Birigui", data: "21/04/2026"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-                                destino: "Birigui", data: "20/04/2026"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-                                destino: "Birigui", data: "19/04/2026"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-                                destino: "Birigui", data: "18/04/2026"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-                                destino: "Birigui", data: "17/04/2026"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-                                destino: "Birigui", data: "16/04/2026"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-                                destino: "Birigui", data: "15/04/2026"},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X",
+                                destino: "Birigui", saida: "24/04/2026 xx:xx", chegada: "24/04/2026 yy:yy"},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X",
+                                destino: "Birigui", saida: "23/04/2026 xx:xx", chegada: "23/04/2026 yy:yy"},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X",
+                                destino: "Birigui", saida: "22/04/2026 xx:xx", chegada: "22/04/2026 yy:yy"},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X",
+                                destino: "Birigui", saida: "21/04/2026 xx:xx", chegada: "21/04/2026 yy:yy"},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X",
+                                destino: "Birigui", saida: "20/04/2026 xx:xx", chegada: "20/04/2026 yy:yy"},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X",
+                                destino: "Birigui", saida: "19/04/2026 xx:xx", chegada: "19/04/2026 yy:yy"},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X",
+                                destino: "Birigui", saida: "18/04/2026 xx:xx", chegada: "18/04/2026 yy:yy"},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X",
+                                destino: "Birigui", saida: "17/04/2026 xx:xx", chegada: "17/04/2026 yy:yy"},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X",
+                                destino: "Birigui", saida: "16/04/2026 xx:xx", chegada: "16/04/2026 yy:yy"},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X",
+                                destino: "Birigui", saida: "15/04/2026 xx:xx", chegada: "15/04/2026 yy:yy"},
     ]
 
 const registroGeral = [
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-                                destino: "Birigui", data: "24/04/2026"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-                                destino: "Birigui", data: "23/04/2026"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-                                destino: "Birigui", data: "22/04/2026"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-                                destino: "Birigui", data: "21/04/2026"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-                                destino: "Birigui", data: "20/04/2026"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-                                destino: "Birigui", data: "19/04/2026"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-                                destino: "Birigui", data: "18/04/2026"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-                                destino: "Birigui", data: "17/04/2026"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-                                destino: "Birigui", data: "16/04/2026"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-                                destino: "Birigui", data: "15/04/2026"},
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-                                destino: "Birigui", data: "24/04/2026"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-                                destino: "Birigui", data: "23/04/2026"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-                                destino: "Birigui", data: "22/04/2026"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-                                destino: "Birigui", data: "21/04/2026"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-                                destino: "Birigui", data: "20/04/2026"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-                                destino: "Birigui", data: "19/04/2026"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-                                destino: "Birigui", data: "18/04/2026"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-                                destino: "Birigui", data: "17/04/2026"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-                                destino: "Birigui", data: "16/04/2026"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-                                destino: "Birigui", data: "15/04/2026"},
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-                                destino: "Birigui", data: "24/04/2026"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-                                destino: "Birigui", data: "23/04/2026"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-                                destino: "Birigui", data: "22/04/2026"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-                                destino: "Birigui", data: "21/04/2026"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-                                destino: "Birigui", data: "20/04/2026"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-                                destino: "Birigui", data: "19/04/2026"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-                                destino: "Birigui", data: "18/04/2026"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-                                destino: "Birigui", data: "17/04/2026"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-                                destino: "Birigui", data: "16/04/2026"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-                                destino: "Birigui", data: "15/04/2026"},
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-                                destino: "Birigui", data: "24/04/2026"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-                                destino: "Birigui", data: "23/04/2026"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-                                destino: "Birigui", data: "22/04/2026"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-                                destino: "Birigui", data: "21/04/2026"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-                                destino: "Birigui", data: "20/04/2026"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-                                destino: "Birigui", data: "19/04/2026"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-                                destino: "Birigui", data: "18/04/2026"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-                                destino: "Birigui", data: "17/04/2026"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-                                destino: "Birigui", data: "16/04/2026"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-                                destino: "Birigui", data: "15/04/2026"},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
+                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
     ]
 
 export const LogRecente = () => {
 
     // Registros Ativos contém os carros que estão sendo usados agora
     const [registroAtivos, setRegistroAtivos] = useState([
-        {motorista: "Adriano", veiculo: "carro1", origem: "Araçatuba",
-            destino: "Birigui", data: "24/04/2026", agendamento: "1"},
-        {motorista: "Beto", veiculo: "carro2", origem: "Araçatuba",
-            destino: "Birigui", data: "23/04/2026", agendamento: "1"},
-        {motorista: "Carlos", veiculo: "carro3", origem: "Araçatuba",
-            destino: "Birigui", data: "22/04/2026", agendamento: "1"},
-        {motorista: "Douglas", veiculo: "carro4", origem: "Araçatuba",
-            destino: "Birigui", data: "21/04/2026", agendamento: "1"},
-        {motorista: "Eduardo", veiculo: "carro5", origem: "Araçatuba",
-            destino: "Birigui", data: "20/04/2026", agendamento: "1"},
-        {motorista: "Fabio", veiculo: "carro6", origem: "Araçatuba",
-            destino: "Birigui", data: "19/04/2026", agendamento: "1"},
-        {motorista: "Gustavo", veiculo: "carro7", origem: "Araçatuba",
-            destino: "Birigui", data: "18/04/2026", agendamento: "1"},
-        {motorista: "Henrique", veiculo: "carro8", origem: "Araçatuba",
-            destino: "Birigui", data: "17/04/2026", agendamento: "1"},
-        {motorista: "Igor", veiculo: "carro9", origem: "Araçatuba",
-            destino: "Birigui", data: "16/04/2026", agendamento: "1"},
-        {motorista: "Jonas", veiculo: "carro10", origem: "Araçatuba",
-            destino: "Birigui", data: "15/04/2026", agendamento: "1"},
+        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X",
+            destino: "Birigui", saida: "24/04/2026 xx:xx", estimada: "24/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X",
+            destino: "Birigui", saida: "23/04/2026 xx:xx", estimada: "23/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X",
+            destino: "Birigui", saida: "22/04/2026 xx:xx", estimada: "22/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X",
+            destino: "Birigui", saida: "21/04/2026 xx:xx", estimada: "21/04/2026 yy:yy",agendamento: "1"},
+        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X",
+            destino: "Birigui", saida: "20/04/2026 xx:xx", estimada: "23/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X",
+            destino: "Birigui", saida: "19/04/2026 xx:xx", estimada: "19/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X",
+            destino: "Birigui", saida: "18/04/2026 xx:xx", estimada: "20/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X",
+            destino: "Birigui", saida: "17/04/2026 xx:xx", estimada: "17/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X",
+            destino: "Birigui", saida: "16/04/2026 xx:xx", estimada: "16/04/2026 yy:yy", agendamento: "1"},
+        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X",
+            destino: "Birigui", saida: "15/04/2026 xx:xx", estimada: "15/04/2026 yy:yy", agendamento: "1"},
     ])
 
     const confirmarChegada = (index) => {
@@ -158,10 +158,11 @@ export const LogRecente = () => {
                                 <tr>
                                     <th>Motorista</th>
                                     <th>Veículo</th>
-                                    <th>Origem</th>
+                                    <th>Motivo</th>
                                     <th>Destino</th>
-                                    <th>Data</th>
-                                    <th>Chegada</th>
+                                    <th>Saída</th>
+                                    <th>Chegada Estimada</th>
+                                    <th>Marcar Chegada</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,9 +170,10 @@ export const LogRecente = () => {
                                     <tr key={index}>
                                         <td>{reg.motorista}</td>
                                         <td>{reg.veiculo}</td>
-                                        <td>{reg.origem}</td>
+                                        <td>{reg.motivo}</td>
                                         <td>{reg.destino}</td>
-                                        <td>{reg.data}</td>
+                                        <td>{reg.saida}</td>
+                                        <td>{reg.estimada}</td>
                                         <td>
                                             {reg.agendamento === "1" && (
                                                 <button onClick={() => confirmarChegada(index)}>
@@ -194,9 +196,10 @@ export const LogRecente = () => {
                                 <tr>
                                     <th>Motorista</th>
                                     <th>Veículo</th>
-                                    <th>Origem</th>
+                                    <th>Motivo</th>
                                     <th>Destino</th>
-                                    <th>Data</th>
+                                    <th>Saída</th>
+                                    <th>Chegada</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -204,9 +207,10 @@ export const LogRecente = () => {
                                     <tr>
                                         <td>{reg.motorista}</td>
                                         <td>{reg.veiculo}</td>
-                                        <td>{reg.origem}</td>
+                                        <td>{reg.motivo}</td>
                                         <td>{reg.destino}</td>
-                                        <td>{reg.data}</td>
+                                        <td>{reg.saida}</td>
+                                        <td>{reg.chegada}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -233,7 +237,7 @@ export const LogGeral = () => {
         ${reg.veiculo}
             ${reg.origem}
             ${reg.destino}
-            ${reg.data}
+            ${reg.saida}
         `.toLowerCase()
 
         return termos.every(termo => texto.includes(termo))
@@ -272,9 +276,11 @@ export const LogGeral = () => {
                         <tr>
                             <th>Motorista</th>
                             <th>Veículo</th>
-                            <th>Origem</th>
+                            <th>Motivo</th>
                             <th>Destino</th>
-                            <th>Data</th>
+                            <th>Odômetro</th>
+                            <th>Saída</th>
+                            <th>Observações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -282,9 +288,11 @@ export const LogGeral = () => {
                             <tr key={index}>
                                 <td>{reg.motorista}</td>
                                 <td>{reg.veiculo}</td>
-                                <td>{reg.origem}</td>
+                                <td>{reg.motivo}</td>
                                 <td>{reg.destino}</td>
-                                <td>{reg.data}</td>
+                                <td>{reg.odometro}</td>
+                                <td>{reg.saida}</td>
+                                <td>{reg.observacoes}</td>
                             </tr>
                         ))}
                     </tbody>
