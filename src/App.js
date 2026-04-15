@@ -14,6 +14,9 @@ import {
 } from "./pages/Logs/Logs.jsx";
 import Saida from "./pages/Saida/RegSaida";
 import Veiculos from "./pages/Veiculos";
+import Gerenciar from "./pages/Gerenciar";
+import LoginPage from "./login_page/LoginPage";
+import { useLocation } from "react-router-dom";
 import Gerenciar from "./pages/Gerenciar/Gerenciar";
 
 import logo from "./assets/logo.png";
@@ -47,43 +50,50 @@ const MainContent = styled.div`
     }
 `;
 
+// wrapper: React needs to return only one component
+const AppContent = ({ sidebarOpen, setSidebarOpen }) => {
+    const location = useLocation()
+    if (location.pathname == "/login"){
+        return (
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                </Routes>
+                );
+    }else{
+        return (
+            <>
+                <Topbar/>
+                <Sidebar 
+                    sidebarOpen={sidebarOpen}
+                    setSidebarOpen={setSidebarOpen}
+                />
+
+                <MainContent sidebarOpen={sidebarOpen}>
+                    <Routes>
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/logs/recente" element={<LogRecente />} />
+                        <Route path="/logs/geral" element={<LogGeral />} />
+                        <Route path="/saida" element={<Saida />} />
+                        <Route path="/veiculos" element={<Veiculos />} />
+                        <Route path="/gerenciar" element={<Gerenciar />} />
+                    </Routes>
+                </MainContent>
+            </>
+        );
+    }
+}
+
 function App() {
-      const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <Router>
-            <Topbar />
-            <Sidebar 
-                sidebarOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
-            />
-
-            <MainContent sidebarOpen={sidebarOpen}>
-                <Routes>
-                    <Route
-                        path="/logs/recente"
-                        element={<LogRecente />}
-                    />
-                    <Route
-                        path="/logs/geral"
-                        element={<LogGeral />}
-                    />
-                    <Route
-                        path="/saida"
-                        element={<Saida />}
-                    />
-                    <Route
-                        path="/veiculos"
-                        element={<Veiculos />}
-                    />
-                    <Route
-                        path="/gerenciar"
-                        element={<Gerenciar />}
-                    />
-                </Routes>
-            </MainContent>
-        </Router>
-    );
+            <Router>
+                <AppContent 
+                    sidebarOpen={sidebarOpen} 
+                    setSidebarOpen={setSidebarOpen} 
+                />
+            </Router>
+        );
 }
 
 export default App;

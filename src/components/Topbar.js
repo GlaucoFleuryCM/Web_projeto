@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaDoorOpen } from "react-icons/fa";
 
 const Top = styled.div`
     background: #013185;
@@ -9,9 +11,9 @@ const Top = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
-    padding: 0 2rem;
+    padding: 0 1rem;
     width: 100vw;
 
     position: fixed;
@@ -21,10 +23,15 @@ const Top = styled.div`
 const Topbar = () => {
     return (
         <Top>
-            <h1 style={{ color: "white", margin: 0, fontSize: "2rem", fontWeight: "bold" }}>
+            <Link to="/login">
+                <figure>
+                    <FaDoorOpen fontSize={"40px"} color="white"  path="/login"/>
+                </figure>
+            </Link>
+            <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", paddingLeft: "40px"}}>
                 Severino Manoel da Silva Neto
             </h1>
-            <span style={{ color: "white", fontSize: "2rem", fontWeight: "bold" }}>
+            <span style={{ color: "white", fontSize: "2rem", fontWeight: "bold", marginLeft: "auto" }}>
                 Calmart
             </span>
         </Top>
