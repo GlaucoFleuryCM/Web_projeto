@@ -14,7 +14,6 @@ import {
 } from "./pages/Logs/Logs.jsx";
 import Saida from "./pages/Saida/RegSaida";
 import Veiculos from "./pages/Veiculos";
-import Gerenciar from "./pages/Gerenciar";
 import LoginPage from "./login_page/LoginPage";
 import { useLocation } from "react-router-dom";
 import Gerenciar from "./pages/Gerenciar/Gerenciar";
