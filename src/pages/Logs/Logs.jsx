@@ -222,14 +222,6 @@ export const LogGeral = () => {
 
     const [busca, setBusca] = useState("")
 
-    const escapeRegex = (text) => {
-    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-    const termo = escapeRegex(busca.toLowerCase())
-
-    const regex = new RegExp(`\\b${termo}\\b`)
-
     const termos = busca
     .toLowerCase()
     .split(" ")
