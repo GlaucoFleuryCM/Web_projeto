@@ -1,3 +1,22 @@
+.page-title-top {
+    color: #013185;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.page-title-table { 
+    color: #013185;
+    font-size: 25px;
+}
+
+.lower-title {
+    margin-bottom: 20px;
+}
+
+.lower-title span {
+    margin-left: 15px;
+}
+
 .search-container {
     display: flex;
     align-items: center;
@@ -164,10 +183,6 @@
     box-sizing: border-box;
 }
 
-.lower-title span {
-    font-size: 25px;
-}
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -184,10 +199,12 @@
 }
 
 .modal {
-    background: white;
+    height: 77vh;
+    width: 56vw;
+    
+    background: #013185;
     padding: 20px;
     border-radius: 10px;
-    width: 400px;
 
     display: flex;
     flex-direction: column;
@@ -197,11 +214,42 @@
 .modal input,
 .modal textarea {
     width: 100%;
+    font-size: 23px;
     padding: 6px;
+}
+
+
+.modal h2, .modal p,
+.modal label {
+    color: white;
+}
+
+.modal p {
+    font-size: x-large;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.modal label, .modal input {
+    font-size: x-large;
 }
 
 .modal-botoes {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 85px;
+}
+
+.modal-botoes button{
+    height: 50px;
+    width: 140px;
+
+    font-weight: bold;
+    font-size: 1rem;
+    color: white;
+
+    background-color: #121bbb;
 }

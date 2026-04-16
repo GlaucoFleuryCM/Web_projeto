@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { FaCircle } from "react-icons/fa";
 
 import './Logs.css'
 
@@ -170,13 +171,14 @@ export const LogRecente = () => {
 
     return (
         <div className="log-recente">
-            <h1 className="page-title">Movimentações Recentes</h1>
+            <h1 className="page-title-top">Movimentações Recentes</h1>
             <div id="container-tabelas">
                 {registroAtivos.length !== 0 &&
                     (
                     <div className="table-wrapper">
                         <div className="lower-title">
-                            <span className = "page-title">Movimentações Ativas</span>
+                            <FaCircle color="#013185" size={14}/>
+                            <span className = "page-title-table">Movimentações Ativas</span>
                         </div>
                         <table className="ativos">
                             <thead>
@@ -216,7 +218,8 @@ export const LogRecente = () => {
                 {registroUltimos10.length !== 0 && (
                     <div className="table-wrapper">
                         <div className="lower-title">
-                            <span className="page-title">10 Últimas Movimentações</span>
+                            <FaCircle color="#013185" size={14}/>
+                            <span className="page-title-table">10 Últimas Movimentações</span>
                         </div>
                         <table className="10-ultimos">
                             <thead>
@@ -257,6 +260,7 @@ export const LogRecente = () => {
 
                                     <label><b>Data de chegada:</b></label>
                                     <input
+                                        id="first"
                                         type="datetime-local"
                                         value={dataChegada}
                                         onChange={(e) => setDataChegada(e.target.value)}
@@ -271,6 +275,8 @@ export const LogRecente = () => {
 
                                     <label><b>Observações:</b></label>
                                     <textarea
+                                        lang="pt-BR"
+                                        rows={3}
                                         value={observacoes}
                                         onChange={(e) => setObservacoes(e.target.value)}
                                     />
