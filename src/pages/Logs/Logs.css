@@ -1,3 +1,79 @@
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  border-radius: 8px;
+  border: 2px solid #121bbb;
+
+  font-size: 1rem;
+}
+
+.tooltip-icon {
+    background-color: #4253AE;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-20%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tooltip-container {
+    position: relative;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #333;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+
+    white-space: nowrap;
+
+    transition: opacity 0.2s ease;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 .table-wrapper {
     overflow: hidden;
@@ -5,25 +81,41 @@
     border: none;
 }
 
-table {
+.table-wrapper table {
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
 }
 
-table th {
+.table-wrapper table th {
   background-color: #4253AE;
   color: white;
-  text-align: left;
-  border: 1px solid black;
+  text-align: center;
+  border: 1px solid #013185;
   padding: 12px;
 }
 
-table td {
-    background-color: #FFF7D6;
+.table-wrapper table td {
+    background-color: rgb(228, 236, 255);
     color: black;
-    text-align: left;
-    border: 1px solid black;
+    text-align: center;
+    border: 1px solid #013185;
+    padding: 5px;
+}
+
+.table-wrapper table tr.active td {
+    background-color: rgb(244, 255, 199);
+    color: black;
+    text-align: center;
+    border: 1px solid #013185;
+    padding: 5px;
+}
+
+.table-wrapper table tr.unactive td {
+    background-color: rgb(199, 255, 215);
+    color: black;
+    text-align: center;
+    border: 1px solid #013185;
     padding: 5px;
 }
 
@@ -60,14 +152,6 @@ table td {
     border-color: #4253AE;
 }
 
-#search-bar {
-    margin-bottom: "10px";
-    padding: "8px";
-    width: "100%";
-    border-radius: "5px";
-    border: 1px solid black;
-}
-
 .log-recente {
     width: 70%;
     padding: 20px;
@@ -78,4 +162,46 @@ table td {
     width: 70%;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.lower-title span {
+    font-size: 25px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal input,
+.modal textarea {
+    width: 100%;
+    padding: 6px;
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
