@@ -24,6 +24,7 @@ const registroUltimos10 = [
             destino: "Birigui", saida: "16/04/2026 xx:xx", chegada: "16/04/2026 yy:yy", active: "0"},
         {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X",
             destino: "Birigui", saida: "15/04/2026 xx:xx", chegada: "15/04/2026 yy:yy", active: "0"},
+        ]
 
 const registroGeral = [
         {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
