@@ -1,3 +1,4 @@
+
 .page-title-top {
     color: #013185;
     margin-top: 20px;
@@ -108,9 +109,10 @@
 
 
 .table-wrapper {
-    overflow: hidden;
     border-radius: 5px;
     border: none;
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .table-wrapper table {
@@ -252,9 +254,4 @@ form .botoes {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-}
-
-form .fixed {
-    font-weight: normal;
 }
