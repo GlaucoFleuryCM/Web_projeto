@@ -26,7 +26,7 @@ form {
     
     padding: 1rem 4rem;
     border: 3px solid #6565a0;
-    background-color: #9b9bcd;
+    background-color: #013185;
     border-radius: 10px;
 }
 
@@ -40,6 +40,7 @@ form .form-group {
 form label {
     font-size: 1rem;
     margin-left: 1rem;
+    color: #eee;
 }
 
 form .form-field {
@@ -53,7 +54,7 @@ form .form-field {
 }
 
 form .form-field:hover {
-    background-color: thistle;
+    background-color: #FFF7D6;
 }
 
 form .submit {
@@ -68,7 +69,7 @@ form .submit {
 }
 
 form .submit:hover {
-    background-color:  #FFF7D6
+    background-color:  #FFF7D6;
 }
 
 /* Chrome, Safari, Edge, Opera */

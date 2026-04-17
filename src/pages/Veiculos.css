@@ -1,13 +1,19 @@
 .search-bar {
-  width: 300px;
+  width: 19rem;
   padding: 10px;
-  margin-bottom: 20px;
-  margin-top: 25px;
-
   border-radius: 8px;
   border: 2px solid #013185;
 
   font-size: 1rem;
+}
+
+.tooltip-wrapper-veiculos {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2.5rem;
 }
 
 .carousel-wrapper {

@@ -120,20 +120,6 @@ export const LogRecente = () => {
             destino: "Birigui", saida: "23/04/2026 xx:xx", estimada: "23/04/2026 yy:yy", active: "1"},
         {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X",
             destino: "Birigui", saida: "22/04/2026 xx:xx", estimada: "22/04/2026 yy:yy", active: "1"},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X",
-            destino: "Birigui", saida: "21/04/2026 xx:xx", estimada: "21/04/2026 yy:yy", active: "1"},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X",
-            destino: "Birigui", saida: "20/04/2026 xx:xx", estimada: "23/04/2026 yy:yy", active: "1"},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X",
-            destino: "Birigui", saida: "19/04/2026 xx:xx", estimada: "19/04/2026 yy:yy", active: "1"},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X",
-            destino: "Birigui", saida: "18/04/2026 xx:xx", estimada: "20/04/2026 yy:yy", active: "1"},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X",
-            destino: "Birigui", saida: "17/04/2026 xx:xx", estimada: "17/04/2026 yy:yy", active: "1"},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X",
-            destino: "Birigui", saida: "16/04/2026 xx:xx", estimada: "16/04/2026 yy:yy", active: "1"},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X",
-            destino: "Birigui", saida: "15/04/2026 xx:xx", estimada: "15/04/2026 yy:yy", active: "1"},
     ])
 
     const [modalAberto, setModalAberto] = useState(false)
@@ -158,7 +144,7 @@ export const LogRecente = () => {
         setModalAberto(true)
     }
 
-    const finalizarRetorno = () => {
+    const finalizarRetorno = (e) => {
         console.log("retorno finalizado", {
             ...registroSelecionado,
             dataChegada,
@@ -203,7 +189,8 @@ export const LogRecente = () => {
                                         <td>{reg.estimada}</td>
                                         <td>
                                             {reg.active === "1" && (
-                                                <button onClick={() => confirmarChegada(index)}>
+                                                <button className="log-btn" 
+                                                        onClick={() => confirmarChegada(index)}>
                                                     Confirmar
                                                 </button>
                                             )}
@@ -248,7 +235,7 @@ export const LogRecente = () => {
 
                         {modalAberto && (
                             <div className="modal-overlay">
-                                <div className="modal">
+                                <form className="modal">
 
                                     <h2>Finalizar Retorno</h2>
 
@@ -281,17 +268,17 @@ export const LogRecente = () => {
                                         onChange={(e) => setObservacoes(e.target.value)}
                                     />
 
-                                    <div className="modal-botoes">
-                                        <button onClick={() => setModalAberto(false)}>
+                                    <div className="botoes">
+                                        <button className="submit" onClick={() => setModalAberto(false)}>
                                             Cancelar
                                         </button>
 
-                                        <button onClick={finalizarRetorno}>
+                                        <button className="submit" onClick={finalizarRetorno}>
                                             Finalizar retorno
                                         </button>
                                     </div>
 
-                                </div>
+                                </form>
                             </div>
                         )}
                     </div>
@@ -323,7 +310,7 @@ export const LogGeral = () => {
     })
     const [paginaAtual, setPaginaAtual] = useState(1)
 
-    const itensPagina = 25
+    const itensPagina = 18
 
     const indexFinal = paginaAtual * itensPagina
 

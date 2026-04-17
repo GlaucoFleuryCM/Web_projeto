@@ -40,13 +40,22 @@ const Veiculos = () => {
     // Wrapper for error (same logic as the error in login)
     return (
         <div className="carousel-wrapper">
-        <input
-            type="text"
-            placeholder="Buscar"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="search-bar"
-        />
+        <div className= "tooltip-wrapper-veiculos">
+            <input
+                type="text"
+                placeholder="Buscar"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-bar"
+            />
+            
+            <div className="tooltip-container">
+                <span className="tooltip-icon">?</span>
+                <span className="tooltip-text">
+                    AAAAAAAAAAAAAAAAAAAAAAAAA.
+                </span>
+            </div>
+        </div>
 
         <EmblaCarousel slides={filteredSlides} options={OPTIONS} />
         </div>

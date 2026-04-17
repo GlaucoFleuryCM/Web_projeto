@@ -9,6 +9,7 @@
   background-color: #013185;
   border-radius: 12px;
   padding: 20px;
+  
 
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@
 }
 
 .vehicle-image {
-  width: 100%;
+  width: 90%;
   aspect-ratio: 1 / 0.8;   
   object-fit: cover;       
   border-radius: 10px;

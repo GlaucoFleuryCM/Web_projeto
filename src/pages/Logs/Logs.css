@@ -35,6 +35,19 @@
   font-size: 1rem;
 }
 
+.log-btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    background-color: #F1F1E6;
+    border-color: #babaae;
+    cursor: pointer;
+
+}
+
+.log-btn:hover {
+    background-color: #FFF7D6;
+}
+
 .tooltip-icon {
     background-color: #4253AE;
     color: white;
@@ -237,19 +250,9 @@
     font-size: x-large;
 }
 
-.modal-botoes {
+form .botoes {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    margin-top: 85px;
-}
-
-.modal-botoes button{
-    height: 50px;
-    width: 140px;
-
-    font-weight: bold;
-    font-size: 1rem;
-    color: white;
-
-    background-color: #121bbb;
+    align-items: center;
 }
