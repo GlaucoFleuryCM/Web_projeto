@@ -2,11 +2,11 @@ import React from "react";
 
 import { FaClipboardList } from "react-icons/fa";
 import { FaCar } from "react-icons/fa";
-import { MdOutlineManageAccounts } from "react-icons/md";
 import { FaShippingFast } from "react-icons/fa";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { RiArrowUpSFill } from "react-icons/ri";
 import { IoIosPaper } from "react-icons/io";
+import { FaCog } from "react-icons/fa";
 
 export const SidebarData = [
     {
@@ -41,7 +41,7 @@ export const SidebarData = [
     {
         title: "Gerenciar Sistema",
         path: "/gerenciar",
-        icon: <MdOutlineManageAccounts />,
+        icon: <FaCog />,
     },
 
 

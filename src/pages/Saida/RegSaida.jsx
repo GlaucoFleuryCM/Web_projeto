@@ -139,7 +139,7 @@ const Saida = () => {
 
                     {!saidaManual ? (
                         <div className="form-group">
-                            <span>
+                            <span className="saida">
                                 Saída: {formData.saida.toLocaleString()}
                             </span>
                         </div>

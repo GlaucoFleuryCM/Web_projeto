@@ -23,3 +23,7 @@
 
     transition: display .5s;
 }
+
+.saida {
+    color: #eee;
+}

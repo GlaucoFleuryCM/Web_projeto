@@ -1,8 +1,13 @@
 import React from "react";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import { useState } from "react";
 import { FaCircle } from "react-icons/fa";
 
 import './Logs.css'
+import '../../index.css'
 
 const registroUltimos10 = [
         {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X",
@@ -136,6 +141,7 @@ export const LogRecente = () => {
 
         const agora = new Date()
         const formatado = agora.toISOString().slice(0,16) // yyyy-MM-ddTHH:mm
+        setDataChegada(agora)
 
         setDataChegada(formatado)
         setOdometro("")
@@ -232,49 +238,63 @@ export const LogRecente = () => {
                                 ))}
                             </tbody>
                         </table>
-
+                    
                         {modalAberto && (
                             <div className="modal-overlay">
-                                <form className="modal">
+                                <form className="form">
 
                                     <h2>Finalizar Retorno</h2>
 
-                                    <p><b>Motorista:</b> {registroSelecionado.motorista}</p>
-                                    <p><b>Veículo:</b> {registroSelecionado.veiculo}</p>
-                                    <p><b>Origem:</b> {registroSelecionado.origem}</p>
-                                    <p><b>Destino:</b> {registroSelecionado.destino}</p>
-                                    <p><b>Data de saída:</b> {registroSelecionado.data}</p>
+                                    <div className="form-group"> 
+                                        <label>Motorista: <span className="fixed">{registroSelecionado.motorista}</span></label>
+                                        <label>Veículo: <span className="fixed">{registroSelecionado.veiculo}</span></label>
+                                        <label>Motivo: <span className="fixed">{registroSelecionado.motivo}</span></label>
+                                        <label>Data de saída: <span className="fixed">{registroSelecionado.saida}</span></label>
+                                        <label>Ultimo Valor do Odômetro: <span className="fixed">{"110.710"}</span></label>
+                                    </div>
 
-                                    <label><b>Data de chegada:</b></label>
-                                    <input
-                                        id="first"
-                                        type="datetime-local"
-                                        value={dataChegada}
-                                        onChange={(e) => setDataChegada(e.target.value)}
-                                    />
+                                    <div className="form-group">
+                                        <label>Data de chegada:</label>
+                                        <DatePicker
+                                            selected={dataChegada}
+                                            onChange={(date) => setDataChegada(date)}
+                                            showTimeSelect
+                                            timeFormat="HH:mm"
+                                            timeIntervals={15}
+                                            dateFormat="dd/MM/yyyy HH:mm"
+                                            minDate={new Date()}
+                                            className="form-field"
+                                        />
+                                    </div>
 
-                                    <label><b>Odômetro:</b></label>
-                                    <input
-                                        type="number"
-                                        value={odometro}
-                                        onChange={(e) => setOdometro(e.target.value)}
-                                    />
+                                    <div className="form-group"> 
+                                        <label>Odômetro:</label>
+                                        <input
+                                            className="form-field"
+                                            type="number"
+                                            value={odometro}
+                                            onChange={(e) => setOdometro(e.target.value)}
+                                        />
+                                    </div>
 
-                                    <label><b>Observações:</b></label>
-                                    <textarea
-                                        lang="pt-BR"
-                                        rows={3}
-                                        value={observacoes}
-                                        onChange={(e) => setObservacoes(e.target.value)}
-                                    />
+                                    <div className="form-group"> 
+                                        <label>Observações:</label>
+                                        <textarea
+                                            className="form-field"
+                                            lang="pt-BR"
+                                            rows={3}
+                                            value={observacoes}
+                                            onChange={(e) => setObservacoes(e.target.value)}
+                                        />
+                                    </div>
 
                                     <div className="botoes">
-                                        <button className="submit" onClick={() => setModalAberto(false)}>
-                                            Cancelar
-                                        </button>
-
                                         <button className="submit" onClick={finalizarRetorno}>
                                             Finalizar retorno
+                                        </button>
+
+                                        <button className="submit" onClick={() => setModalAberto(false)}>
+                                            Cancelar
                                         </button>
                                     </div>
 
@@ -310,7 +330,7 @@ export const LogGeral = () => {
     })
     const [paginaAtual, setPaginaAtual] = useState(1)
 
-    const itensPagina = 18
+    const itensPagina = 17
 
     const indexFinal = paginaAtual * itensPagina
 

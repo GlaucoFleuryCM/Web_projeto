@@ -211,43 +211,17 @@
     z-index: 1000;
 }
 
-.modal {
-    height: 77vh;
-    width: 56vw;
-    
-    background: #013185;
-    padding: 20px;
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.modal-overlay form {
+    width: 27%;
+    padding: 1rem 3rem;
 }
 
-.modal input,
-.modal textarea {
-    width: 100%;
-    font-size: 23px;
-    padding: 6px;
+.modal-overlay form .form-field {
+    width: 300px;
 }
 
-
-.modal h2, .modal p,
-.modal label {
-    color: white;
-}
-
-.modal p {
-    font-size: x-large;
-}
-
-.modal h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-.modal label, .modal input {
-    font-size: x-large;
+form h2 {
+    color: #eee;
 }
 
 form .botoes {
@@ -255,4 +229,9 @@ form .botoes {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+}
+
+form .fixed {
+    font-weight: normal;
 }
