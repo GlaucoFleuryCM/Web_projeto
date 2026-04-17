@@ -23,20 +23,23 @@ const Top = styled.div`
 const Topbar = ({ setIsLoggedIn}) => {
     return (
         <Top>
-            <Link to="/login">
-                <figure
-                    onClick={() => setIsLoggedIn(false)} 
-                    style={{ cursor: "pointer" }}
-                >
-                    <FaDoorOpen fontSize={"40px"} color="white" />
-                </figure>
-            </Link>
             <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", paddingLeft: "40px"}}>
-                Severino Manoel da Silva Neto
-            </h1>
-            <span style={{ color: "white", fontSize: "2rem", fontWeight: "bold", marginLeft: "auto" }}>
                 Calmart
-            </span>
+            </h1>
+
+            <div style={{marginLeft:"auto", display:"flex", flexDirection:"row", gap:"2rem", alignItems:"center"}}>
+                <span style={{ color: "white", fontSize: "1.6rem", fontWeight: "bold"}}>
+                    Severino Manoel da Silva Neto
+                </span>
+                <Link to="/login">
+                    <figure
+                        onClick={() => setIsLoggedIn(false)} 
+                        style={{ cursor: "pointer" }}
+                        >
+                        <FaDoorOpen fontSize={"40px"} color="white" />
+                    </figure>
+                </Link>
+            </div>
         </Top>
     );
 };

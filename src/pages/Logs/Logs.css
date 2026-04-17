@@ -214,10 +214,33 @@
 .modal-overlay form {
     width: 27%;
     padding: 1rem 3rem;
+    position: relative;
 }
 
 .modal-overlay form .form-field {
     width: 300px;
+}
+
+.btn-cancelar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    background: #eee;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: .2rem .4rem;    
+
+    color: red;
+}
+
+.btn-cancelar:hover {
+    color: red;
 }
 
 form h2 {

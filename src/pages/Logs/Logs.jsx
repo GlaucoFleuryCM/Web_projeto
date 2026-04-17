@@ -243,6 +243,13 @@ export const LogRecente = () => {
                             <div className="modal-overlay">
                                 <form className="form">
 
+                                    <button 
+                                        type="button"
+                                        className="btn-cancelar"
+                                        onClick={() => setModalAberto(false)}
+                                    >
+                                        X
+                                    </button>
                                     <h2>Finalizar Retorno</h2>
 
                                     <div className="form-group"> 
@@ -288,15 +295,9 @@ export const LogRecente = () => {
                                         />
                                     </div>
 
-                                    <div className="botoes">
-                                        <button className="submit" onClick={finalizarRetorno}>
-                                            Finalizar retorno
-                                        </button>
-
-                                        <button className="submit" onClick={() => setModalAberto(false)}>
-                                            Cancelar
-                                        </button>
-                                    </div>
+                                    <button className="submit" onClick={finalizarRetorno}>
+                                        Finalizar retorno
+                                    </button>
 
                                 </form>
                             </div>
