@@ -82,6 +82,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             item={item}
                             key={index}
                             sidebarOpen={sidebarOpen}
+                            setSidebarOpen={setSidebarOpen}
                         />
                     ))}
                 </SidebarWrap>

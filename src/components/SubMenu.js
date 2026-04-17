@@ -51,9 +51,15 @@ const IconWrapper = styled.div`
     justify-content: center;
 `;
 
-const SubMenu = ({ item, sidebarOpen }) => {
+const SubMenu = ({ item, sidebarOpen, setSidebarOpen}) => {
     const [subnav, setSubnav] = useState(false);
     const showSubnav = () => setSubnav(!subnav);
+
+    const handleClick = () => {
+    if (window.innerWidth <= 768) {
+        setSidebarOpen(false);
+    }
+};
     
     useEffect(() => {
         if (!sidebarOpen) {
@@ -64,9 +70,17 @@ const SubMenu = ({ item, sidebarOpen }) => {
     return (
         <>
             <SidebarLink
-                to={item.path || "#"}
-                onClick={item.subNav && showSubnav}
-            >
+    to={item.path || "#"}
+    onClick={() => {
+        if (item.subNav) {
+            showSubnav(); // abre submenu
+        } else {
+            if (window.innerWidth <= 768) {
+                setSidebarOpen(false); // fecha no mobile
+            }
+        }
+    }}
+    >
                 <IconWrapper>{item.icon}</IconWrapper>
 
                 <SidebarLabel $visible={sidebarOpen}>
@@ -82,12 +96,17 @@ const SubMenu = ({ item, sidebarOpen }) => {
 
             {subnav &&
                 item.subNav.map((subItem, index) => (
-                    <DropdownLink to={subItem.path} key={index}>
+                    <DropdownLink 
+    to={subItem.path} 
+    key={index}
+    onClick={handleClick}
+>
                         <IconWrapper>{subItem.icon}</IconWrapper>
                         <SidebarLabel $visible={sidebarOpen}>
                             {subItem.title}
                         </SidebarLabel>
                     </DropdownLink>
+                    
                 ))}
         </>
     );
