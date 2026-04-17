@@ -20,13 +20,39 @@ code {
 form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    
-    padding: 1rem 4rem;
+    align-items: stretch;
+    gap: 1rem;
+
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+
     border: 3px solid #6565a0;
     background-color: #013185;
     border-radius: 10px;
+}
+
+/* inputs responsivos */
+form .form-field {
+    padding: .6rem 1rem;
+    width: 100%;
+
+        border: 1px solid #babaae;
+    border-radius: 5px;
+    background-color: #F1F1E6;
+    cursor: pointer;
+}
+
+/* botão ocupa largura */
+form .submit {
+    width: 100%;
+
+        cursor: pointer;    
+    background-color: #F1F1E6;
+    border: 2px solid #babaae;
+    border-radius: 10px;
+
+
 }
 
 form .form-group {
@@ -42,29 +68,8 @@ form label {
     color: #eee;
 }
 
-form .form-field {
-    padding: .5rem 1rem;
-    width: 200px;
-
-    border: 1px solid #babaae;
-    border-radius: 5px;
-    background-color: #F1F1E6;
-    cursor: pointer;
-}
-
 form .form-field:hover {
     background-color: #FFF7D6;
-}
-
-form .submit {
-    padding: .7rem 1.2rem;
-    align-self: center;
-
-    cursor: pointer;    
-    background-color: #F1F1E6;
-    border: 2px solid #babaae;
-    border-radius: 10px;
-
 }
 
 form .submit:hover {

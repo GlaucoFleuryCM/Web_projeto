@@ -186,16 +186,12 @@
     border-color: #4253AE;
 }
 
-.log-recente {
-    width: 70%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
+.log-recente,
 .log-geral {
-    width: 70%;
-    padding: 20px;
-    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem;
+    margin: 0 auto;
 }
 
 .modal-overlay {
@@ -254,4 +250,94 @@ form .botoes {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+
+    .log-recente,
+    .log-geral {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .page-title-top,
+    .page-title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .page-title-table {
+        font-size: 1.2rem;
+    }
+
+    .lower-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .search-bar {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .tooltip-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        align-self: flex-end;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .table-wrapper table {
+        min-width: 600px;
+        font-size: 0.8rem;
+    }
+
+    .table-wrapper table th,
+    .table-wrapper table td {
+        padding: 6px;
+    }
+
+    .log-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .paginas {
+        flex-wrap: wrap;
+    }
+
+    .paginas button {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+
+    .modal-overlay form {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .modal-overlay form .form-field {
+        width: 100%;
+    }
+
+    form h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .btn-cancelar {
+        font-size: 1rem;
+    }
 }

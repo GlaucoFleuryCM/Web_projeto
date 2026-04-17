@@ -21,3 +21,70 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+
+  .tooltip-wrapper-veiculos {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .tooltip-icon {
+    align-self: flex-end;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .embla {
+    max-width: 100%;
+    margin-top: 10px;
+
+    --slide-height: auto;
+  }
+
+  .embla__slide {
+    padding-left: 0.5rem;
+  }
+
+  .embla__button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .embla__dot {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .embla__dot:before,
+  .embla__dot:after {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .vehicle-image {
+    width: 100%;
+    aspect-ratio: 1 / 0.7;
+  }
+
+  .card-text p {
+    font-size: 0.9rem;
+  }
+
+  .card-text strong {
+    font-size: 1rem;
+  }
+
+}

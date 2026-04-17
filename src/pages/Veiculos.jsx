@@ -52,7 +52,7 @@ const Veiculos = () => {
             <div className="tooltip-container">
                 <span className="tooltip-icon">?</span>
                 <span className="tooltip-text">
-                    AAAAAAAAAAAAAAAAAAAAAAAAA.
+                    Digite a placa do veículo que deseja procurar.
                 </span>
             </div>
         </div>

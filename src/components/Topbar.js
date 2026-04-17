@@ -1,45 +1,107 @@
-import React, { useState } from "react";
-
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FaDoorOpen } from "react-icons/fa";
+import { FaDoorOpen, FaBars } from "react-icons/fa";
 
+/* CONTAINER */
 const Top = styled.div`
     background: #013185;
     height: 80px;
+    width: 100%;
 
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     padding: 0 1rem;
-    width: 100vw;
 
     position: fixed;
-    z-index: 10;
+    top: 0;
+    left: 0;
+    z-index: 20;
 `;
 
-const Topbar = ({ setIsLoggedIn}) => {
+/* LADO ESQUERDO */
+const Left = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+`;
+
+/* BOTÃO HAMBURGUER */
+const MenuButton = styled.div`
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+
+    display: block;
+
+    @media (min-width: 768px) {
+        display: none; /* só aparece no mobile */
+    }
+`;
+
+/* LOGO / TÍTULO */
+const Title = styled.h1`
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media (min-width: 768px) {
+        font-size: 2rem;
+    }
+`;
+
+/* LADO DIREITO */
+const Right = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+`;
+
+/* NOME DO USUÁRIO */
+const UserName = styled.span`
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (min-width: 768px) {
+        font-size: 1.2rem;
+        max-width: none;
+    }
+`;
+
+const Topbar = ({ setIsLoggedIn, setSidebarOpen }) => {
     return (
         <Top>
-            <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", paddingLeft: "40px"}}>
-                Calmart
-            </h1>
+            <Left>
+                {/* BOTÃO MOBILE */}
+                <MenuButton onClick={() => setSidebarOpen(prev => !prev)}>
+                    <FaBars />
+                </MenuButton>
 
-            <div style={{marginLeft:"auto", display:"flex", flexDirection:"row", gap:"2rem", alignItems:"center"}}>
-                <span style={{ color: "white", fontSize: "1.6rem", fontWeight: "bold"}}>
+                <Title>Calmart</Title>
+            </Left>
+
+            <Right>
+                <UserName>
                     Severino Manoel da Silva Neto
-                </span>
+                </UserName>
+
                 <Link to="/login">
-                    <figure
-                        onClick={() => setIsLoggedIn(false)} 
+                    <div
+                        onClick={() => setIsLoggedIn(false)}
                         style={{ cursor: "pointer" }}
-                        >
-                        <FaDoorOpen fontSize={"40px"} color="white" />
-                    </figure>
+                    >
+                        <FaDoorOpen fontSize={"28px"} color="white" />
+                    </div>
                 </Link>
-            </div>
+            </Right>
         </Top>
     );
 };

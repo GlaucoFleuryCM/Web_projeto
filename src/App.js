@@ -21,9 +21,8 @@ import Gerenciar from "./pages/Gerenciar/Gerenciar";
 import logo from "./assets/logo.png";
 
 const MainContent = styled.div`
-    margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
+    width: 100%;
     padding-top: 80px;
-    transition: margin-left 0.5s ease; 
 
     display: flex;
     flex-direction: column;
@@ -31,7 +30,13 @@ const MainContent = styled.div`
 
     min-height: 100vh;
     position: relative;
-    overflow: hidden;
+
+    transition: all 0.3s ease;
+
+    /* Desktop */
+    @media (min-width: 768px) {
+        margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
+    }
 `;
 
 // wrapper: React needs to return only one component
@@ -51,7 +56,10 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn }) 
                 element={
                     isLoggedIn ? (
                         <>
-                            <Topbar setIsLoggedIn={setIsLoggedIn} />
+                            <Topbar 
+    setIsLoggedIn={setIsLoggedIn}
+    setSidebarOpen={setSidebarOpen}
+/>
                             <Sidebar 
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={setSidebarOpen}

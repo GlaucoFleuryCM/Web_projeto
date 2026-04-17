@@ -1,55 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* Remove dependência fixa de sidebar */
 .home,
 .services,
 .reports,
 .contact,
 .events,
 .support {
-    display: flex;
-    margin-left: 260px;
-    font-size: 2rem;
+  display: flex;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+/* MOBILE FIRST */
+.main-content {
+  width: 100%;
+  padding: 80px 1rem 1rem 1rem; /* espaço do topbar */
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  .main-content {
+    padding-left: 260px; /* espaço sidebar aberta */
+  }
 }

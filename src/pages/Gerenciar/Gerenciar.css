@@ -48,7 +48,7 @@
     gap: 4rem;
 }
 
-.gerenciar .gerenciar form {
+.gerenciar form {
     width: 350px;
 }
 
@@ -103,4 +103,55 @@
 
 .gerenciar button {
     color: black;
+}
+
+@media (max-width: 768px) {
+
+    .gerenciar {
+        padding: 1rem 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .gerenciar .categorias {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+
+    .gerenciar .categoria-btn {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .gerenciar .container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .gerenciar form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .gerenciar .form-field {
+        width: 100%;
+    }
+
+    .gerenciar .vizualização {
+        width: 100%;
+        max-width: 400px;
+        max-height: 300px;
+    }
+
+    .gerenciar .vizualização li {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .gerenciar .delete-btn {
+        font-size: 1.2rem;
+    }
+
 }
