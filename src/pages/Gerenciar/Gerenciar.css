@@ -67,7 +67,7 @@
 }
 
 .gerenciar .vizualização li {
-    background-color: #ffffff;
+    background-color: var(--branco);
     border: 3px solid #e0e0e0;
     border-radius: 5px;
     padding: 1rem 1.2rem;

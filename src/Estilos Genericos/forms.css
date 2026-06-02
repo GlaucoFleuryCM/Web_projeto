@@ -1,0 +1,78 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    gap: 1.25rem;
+    
+    padding: 1rem 4rem;
+    border: 3px solid var(--border-color);
+    background-color: var(--azul-calmart);
+    border-radius: 10px;
+}
+
+form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+form label {
+    font-size: 1rem;
+    margin-left: 1rem;
+    color: var(--branco);
+}
+
+form .form-field {
+    padding: .5rem 1rem;
+    width: 300px;
+
+    border: 1px solid var(--border-areia);
+    border-radius: 5px;
+    background-color: var(--areia);
+    cursor: pointer;
+}
+
+form .form-field:hover {
+    background-color: var(--areia-hover);
+}
+
+form .submit {
+    padding: .7rem 1.2rem;
+    align-self: center;
+
+    cursor: pointer;    
+    background-color: var(--areia);
+    border: 2px solid var(--border-areia);
+    border-radius: 10px;
+
+}
+
+form .submit:hover {
+    background-color:  var(--areia-hover);
+}
+
+form h2 {
+    color: var(--branco);
+}
+
+form .botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.form-field::-webkit-outer-spin-button,
+.form-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.form-field[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

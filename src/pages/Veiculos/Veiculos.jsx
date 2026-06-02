@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react"; // searchbar
-import EmblaCarousel from "./carrousel/EmblaCarousel";
-import './carrousel/embla.css'
-import caminhao from "../assets/caminhao.jpg";
-import motoca from "../assets/motoca.jpg";
-import caminhonete from "../assets/caminhonete.jpg";
+
+import EmblaCarousel from "../../components/Carrousel/EmblaCarousel";
+import '../../components/Carrousel/embla.css'
+import caminhao from "../../assets/caminhao.jpg";
+import motoca from "../../assets/motoca.jpg";
+import caminhonete from "../../assets/caminhonete.jpg";
 import './Veiculos.css';
 
 const Veiculos = () => {
@@ -40,24 +41,24 @@ const Veiculos = () => {
     // Wrapper for error (same logic as the error in login)
     return (
         <div className="carousel-wrapper">
-        <div className= "tooltip-wrapper-veiculos">
-            <input
-                type="text"
-                placeholder="Buscar"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="search-bar"
-            />
-            
-            <div className="tooltip-container">
-                <span className="tooltip-icon">?</span>
-                <span className="tooltip-text">
-                    AAAAAAAAAAAAAAAAAAAAAAAAA.
-                </span>
+            <div className= "search-container">
+                <input
+                    type="text"
+                    placeholder="Buscar"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="search-bar"
+                />
+                
+                <div className="tooltip-container">
+                    <span className="tooltip-icon">?</span>
+                    <span className="tooltip-text">
+                        Você pode pesquisar pela placa do veículo.
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <EmblaCarousel slides={filteredSlides} options={OPTIONS} />
+            <EmblaCarousel slides={filteredSlides} options={OPTIONS} />
         </div>
     );
 };

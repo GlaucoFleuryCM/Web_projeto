@@ -1,0 +1,11 @@
+.carousel-wrapper {
+  display: flex;
+  padding: 1.5rem;
+  padding-top: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-wrapper .search-container{
+  padding: 1.5rem 0;
+}

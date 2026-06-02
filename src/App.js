@@ -12,10 +12,11 @@ import {
     LogRecente,
     LogGeral,
 } from "./pages/Logs/Logs.jsx";
-import Saida from "./pages/Saida/RegSaida";
-import Veiculos from "./pages/Veiculos.jsx";
-import LoginPage from "./login_page/LoginPage";
 import { useLocation, Navigate } from "react-router-dom";
+
+import Saida from "./pages/Saida/RegSaida";
+import Veiculos from "./pages/Veiculos/Veiculos.jsx";
+import LoginPage from "./login_page/LoginPage";
 import Gerenciar from "./pages/Gerenciar/Gerenciar";
 
 import logo from "./assets/logo.png";

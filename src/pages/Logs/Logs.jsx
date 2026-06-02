@@ -1,4 +1,5 @@
 import React from "react";
+import Chegada from "../../components/Chegada/Chegada";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,29 +9,6 @@ import { FaCircle } from "react-icons/fa";
 
 import './Logs.css'
 import '../../index.css'
-
-const registroUltimos10 = [
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X",
-            destino: "Birigui", saida: "24/04/2026 xx:xx", chegada: "24/04/2026 yy:yy", active: "1"},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X",
-            destino: "Birigui", saida: "23/04/2026 xx:xx", chegada: "23/04/2026 yy:yy", active: "1"},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X",
-            destino: "Birigui", saida: "22/04/2026 xx:xx", chegada: "22/04/2026 yy:yy", active: "1"},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X",
-            destino: "Birigui", saida: "21/04/2026 xx:xx", chegada: "21/04/2026 yy:yy", active: "0"},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X",
-            destino: "Birigui", saida: "20/04/2026 xx:xx", chegada: "20/04/2026 yy:yy", active: "0"},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X",
-            destino: "Birigui", saida: "19/04/2026 xx:xx", chegada: "19/04/2026 yy:yy", active: "0"},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X",
-            destino: "Birigui", saida: "18/04/2026 xx:xx", chegada: "18/04/2026 yy:yy", active: "0"},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X",
-            destino: "Birigui", saida: "17/04/2026 xx:xx", chegada: "17/04/2026 yy:yy", active: "0"},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X",
-            destino: "Birigui", saida: "16/04/2026 xx:xx", chegada: "16/04/2026 yy:yy", active: "0"},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X",
-            destino: "Birigui", saida: "15/04/2026 xx:xx", chegada: "15/04/2026 yy:yy", active: "0"},
-        ]
 
 const registroGeral = [
         {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
@@ -135,43 +113,22 @@ export const LogRecente = () => {
     const [observacoes, setObservacoes] = useState("")
 
     const confirmarChegada = (index) => {
-        const reg = registroAtivos[index]
-
-        setRegistroSelecionado(reg)
-
-        const agora = new Date()
-        const formatado = agora.toISOString().slice(0,16) // yyyy-MM-ddTHH:mm
-        setDataChegada(agora)
-
-        setDataChegada(formatado)
-        setOdometro("")
-        setObservacoes("")
-
+        setRegistroSelecionado(registroAtivos[index])
         setModalAberto(true)
     }
 
-    const finalizarRetorno = (e) => {
-        console.log("retorno finalizado", {
-            ...registroSelecionado,
-            dataChegada,
-            odometro,
-            observacoes
-        })
-
-        setModalAberto(false)
-    }
+    const finalizarRetorno = (dados) => {
+        console.log("retorno finalizado", dados);
+        setModalAberto(false);
+    };
 
     return (
         <div className="log-recente">
-            <h1 className="page-title-top">Movimentações Recentes</h1>
+            <h1 className="page-title-top">Movimentações Ativas</h1>
             <div id="container-tabelas">
                 {registroAtivos.length !== 0 &&
                     (
                     <div className="table-wrapper">
-                        <div className="lower-title">
-                            <FaCircle color="#013185" size={14}/>
-                            <span className = "page-title-table">Movimentações Ativas</span>
-                        </div>
                         <table className="ativos">
                             <thead>
                                 <tr>
@@ -208,102 +165,12 @@ export const LogRecente = () => {
                     </div>
                 )}
 
-                {registroUltimos10.length !== 0 && (
-                    <div className="table-wrapper">
-                        <div className="lower-title">
-                            <FaCircle color="#013185" size={14}/>
-                            <span className="page-title-table">10 Últimas Movimentações</span>
-                        </div>
-                        <table className="10-ultimos">
-                            <thead>
-                                <tr>
-                                    <th>Motorista</th>
-                                    <th>Veículo</th>
-                                    <th>Motivo</th>
-                                    <th>Destino</th>
-                                    <th>Saída</th>
-                                    <th>Chegada</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {registroUltimos10.map((reg) => (
-                                    <tr className={reg.active === "0" ? ("unactive") : ("active")}>
-                                        <td>{reg.motorista}</td>
-                                        <td>{reg.veiculo}</td>
-                                        <td>{reg.motivo}</td>
-                                        <td>{reg.destino}</td>
-                                        <td>{reg.saida}</td>
-                                        <td>{reg.chegada}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    
-                        {modalAberto && (
-                            <div className="modal-overlay">
-                                <form className="form">
-
-                                    <button 
-                                        type="button"
-                                        className="btn-cancelar"
-                                        onClick={() => setModalAberto(false)}
-                                    >
-                                        X
-                                    </button>
-                                    <h2>Finalizar Retorno</h2>
-
-                                    <div className="form-group"> 
-                                        <label>Motorista: <span className="fixed">{registroSelecionado.motorista}</span></label>
-                                        <label>Veículo: <span className="fixed">{registroSelecionado.veiculo}</span></label>
-                                        <label>Motivo: <span className="fixed">{registroSelecionado.motivo}</span></label>
-                                        <label>Data de saída: <span className="fixed">{registroSelecionado.saida}</span></label>
-                                        <label>Ultimo Valor do Odômetro: <span className="fixed">{"110.710"}</span></label>
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Data de chegada:</label>
-                                        <DatePicker
-                                            selected={dataChegada}
-                                            onChange={(date) => setDataChegada(date)}
-                                            showTimeSelect
-                                            timeFormat="HH:mm"
-                                            timeIntervals={15}
-                                            dateFormat="dd/MM/yyyy HH:mm"
-                                            minDate={new Date()}
-                                            className="form-field"
-                                        />
-                                    </div>
-
-                                    <div className="form-group"> 
-                                        <label>Odômetro:</label>
-                                        <input
-                                            className="form-field"
-                                            type="number"
-                                            value={odometro}
-                                            onChange={(e) => setOdometro(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <div className="form-group"> 
-                                        <label>Observações:</label>
-                                        <textarea
-                                            className="form-field"
-                                            lang="pt-BR"
-                                            rows={3}
-                                            value={observacoes}
-                                            onChange={(e) => setObservacoes(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <button className="submit" onClick={finalizarRetorno}>
-                                        Finalizar retorno
-                                    </button>
-
-                                </form>
-                            </div>
-                        )}
-                    </div>
-                )}
+                <Chegada
+                    aberto={modalAberto}
+                    registro={registroSelecionado}
+                    onClose={() => setModalAberto(false)}
+                    onFinalizar={finalizarRetorno}
+                />
             </div>
         </div>
     );
@@ -312,6 +179,9 @@ export const LogRecente = () => {
 export const LogGeral = () => {
 
     const [busca, setBusca] = useState("")
+    const [data, setData] = useState(0) // 0 = todas 1 = semana, 2 = 15 dias, 3 = mês, 4 = custom
+    const [dataPersonalizada, setDataPersonalizada] = useState(null)
+    const classeBotaoData = (valor) => `time-btn ${data === valor ? "active" : ""}`;
 
     const termos = busca
     .toLowerCase()
@@ -321,7 +191,7 @@ export const LogGeral = () => {
     const registrosFiltrados = registroGeral.filter((reg) => {
         const texto = `
             ${reg.motorista}
-        ${reg.veiculo}
+            ${reg.veiculo}
             ${reg.origem}
             ${reg.destino}
             ${reg.saida}
@@ -329,17 +199,30 @@ export const LogGeral = () => {
 
         return termos.every(termo => texto.includes(termo))
     })
+    
+    const parseData = (texto) => {
+        const [data] = texto.split(" ")
+        const [dia, mes, ano] = data.split("/")
+
+        return new Date(ano, mes - 1, dia)
+    }
+
     const [paginaAtual, setPaginaAtual] = useState(1)
-
-    const itensPagina = 17
-
+    const itensPagina = 15
     const indexFinal = paginaAtual * itensPagina
-
     const indexInicial = indexFinal - itensPagina
-
     const registroShowing = registrosFiltrados.slice(indexInicial, indexFinal)
-
     const totalPaginas = Math.ceil(registrosFiltrados.length / itensPagina)
+    const classeBotaoPagina = (pagina) =>paginaAtual === pagina ? "pagina-btn active" : "pagina-btn";
+
+
+    const montarFiltros = () => ({
+        busca,
+        periodo: data,
+        dataPersonalizada,
+        pagina: paginaAtual,
+        itensPagina
+    })
 
     return (
         <div className="log-geral">
@@ -362,7 +245,29 @@ export const LogGeral = () => {
                     <span className="tooltip-icon">?</span>
                     <span className="tooltip-text">
                         Digite palavras para filtrar os resultados (motorista, veículo, etc).
+                        É possível usar múltiplos termos separados por espaço para refinar a busca.
                     </span>
+                </div>
+                
+                <div className="time-btns">
+                    <button className={classeBotaoData(1)} onClick={() => setData(1)}>Última Semana</button>
+                    <button className={classeBotaoData(2)} onClick={() => setData(2)}>Últimos 15 dias</button>
+                    <button className={classeBotaoData(3)} onClick={() => setData(3)}>Último Mês</button>
+                    <DatePicker
+                        className={`time-btn ${data === 4 ? "active" : ""}`}
+                        placeholderText="Outra Data"
+                        selected={dataPersonalizada}
+                        onChange={(date) => {
+                            setDataPersonalizada(date)
+                            setData(4)
+                        }}
+                        maxDate={new Date()}
+                        dateFormat="dd/MM/yyyy">
+                    </DatePicker>
+                    <button className={classeBotaoData(0)} onClick={() => {
+                        setData(0)
+                        setDataPersonalizada(null)
+                    }}>Todas</button>
                 </div>
             </div>
 
@@ -396,15 +301,18 @@ export const LogGeral = () => {
             </div>
             
             {registrosFiltrados.length > itensPagina && (
-                <div className="paginas">
-                    {Array.from({ length: totalPaginas }, (_,i) => (
-                        <button key={i} onClick={() => setPaginaAtual(i + 1)}>
-                            {i + 1}
-                        </button>
-                    ))}
-                </div>
-            )}
-
+            <div className="paginas">
+                {Array.from({ length: totalPaginas }, (_, i) => (
+                    <button
+                        key={i}
+                        className={classeBotaoPagina(i + 1)}
+                        onClick={() => setPaginaAtual(i + 1)}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
+            </div>
+        )}
         </div>
     );
 };
