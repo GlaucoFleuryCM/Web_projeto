@@ -15,15 +15,17 @@ const Veiculos = () => {
         {
             img: caminhao,
             info: "Caminhao do Ronaldo; boas condições",
-            status: "Disponível",
+            status: "Manutenção",
             motorista: "---",
+            modelo: "CAMINHÃO",
             placa: "BRA2E19"
         },
         {
             img: motoca,
             info: "Moto da firma; um tanto danifica",
-            status: "Indisponível",
+            status: "Em uso",
             motorista: "Maria da Silva Lourdes",
+            modelo: "MOTO",
             placa: "NEGOI50"
         },
         {
@@ -31,13 +33,27 @@ const Veiculos = () => {
             info: "Caminhonete do Patrão; muito potente",
             status: "Disponível",
             motorista: "---",
+            modelo: "CAMINHONETE",
             placa: "FBJ4E12"
         }
     ];
     // What user wats to see: gfilter by 'placa'
     const filteredSlides = SLIDES.filter((slide) =>
-    slide.placa.toLowerCase().includes(search.toLowerCase())
+        slide.placa.toLowerCase().includes(search.toLowerCase())
     );
+
+    const statusOrder = {
+        "Em uso": 1,
+        "Manutenção": 2,
+        "Disponível": 3
+    };
+
+    const sortedAndFilteredSlides = filteredSlides.sort((a, b) => {
+        const orderA = statusOrder[a.status] || 4; // Se não achar o status, joga pro final (4)
+        const orderB = statusOrder[b.status] || 4;
+        return orderA - orderB;
+    });
+
     // Wrapper for error (same logic as the error in login)
     return (
         <div className="carousel-wrapper">

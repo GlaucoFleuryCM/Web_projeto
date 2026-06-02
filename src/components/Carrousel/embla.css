@@ -1,7 +1,15 @@
+.container-embla {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+
+  width: 100%;
+  align-items: flex-start;
+}
+
 .embla {
-  max-width: 32em;
-  margin: auto;
-  margin-top: 5px;
+  width: 70%;
+  justify-content: center;
 
   --slide-height: 42rem;
   --slide-spacing: 10rem;
@@ -19,6 +27,7 @@
 }
 
 .embla__slide {
+  display: flex;
   transform: translate3d(0, 0, 0);
   flex: 0 0 var(--slide-size);
   justify-content: center;
@@ -39,16 +48,16 @@
 }
 
 .embla__controls {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  justify-content: space-between;
-  gap: 1.2rem;
-  margin-top: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: 0.8rem;
 }
 
 .embla__buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 0.6rem;
   align-items: center;
 }
@@ -88,19 +97,21 @@
 }
 
 .embla__dots {
+  flex: 3;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  justify-content: flex-end;
+
+  justify-content: center;
+  overflow-y: scroll;
   align-items: center;
-  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
 }
 
 .embla__dot {
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   -webkit-appearance: none;
   appearance: none;
-  background-color: #013185;
+  background-color: var(--azul-calmart);
   touch-action: manipulation;
   display: inline-flex;
   text-decoration: none;
@@ -118,25 +129,8 @@
   position: relative;
 }
 
-.embla__dot:before,
-.embla__dot:after {
-  width: 1rem;
-  height: 1rem;
-
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  content: '';
-}
-
-.embla__dot:before {
-  border: 0.2rem solid var(--detail-medium-contrast);
-}
-
-.embla__dot:after {
-  border: 0.2rem solid var(--text-body);
-  opacity: 0;
+.embla__dot--selected {
+  border: 4px solid #888;
 }
 
 .embla__dot--selected:after {
@@ -144,7 +138,6 @@
 }
 
 /* aaed: customizing buttons :p */
-
 .embla__button:hover {
   background-color: #4253AE;     
   border-color: #4253AE;
@@ -154,4 +147,28 @@
   background-color: #888;
   border-color: #888;
   cursor: not-allowed;
+}
+
+@media (max-width: 800px) {
+  .container-embla {
+    flex-direction: column;
+  }
+}
+
+/* --- ESTILIZAÇÃO INDIVIDUAL DOS DOTS --- */
+
+.embla__dot.status-disponivel {
+  background-color: var(--disponivel);
+}
+.embla__dot.status-em-uso {
+  background-color: var(--uso);
+}
+.embla__dot.status-manutencao {
+  background-color: var(--manutencao);
+}
+
+/* --- DESTAQUE DO DOT SELECIONADO --- */
+.embla__dot--selected {
+  border: 3px solid black;
+  box-sizing: border-box;
 }

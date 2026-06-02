@@ -1,6 +1,6 @@
 .card {
   width: 500px;
-  height: 490px;
+  height: 520px;
 
   background-color: var(--azul-calmart);
   border: 3px solid var(--border-color);
@@ -10,6 +10,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--branco);
+}
+
+.status-text {
+  font-weight: bold;
+  color: var(--branco);
+  font-size: 1.5rem;
+}
+
+.status-dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 .card-text {
@@ -29,8 +56,27 @@
 
 .vehicle-image {
   width: 80%;
-  aspect-ratio: 1 / 0.8;   
-  object-fit: cover;       
   border-radius: 10px;
-  border: 1px solid var(--border-color);
+  aspect-ratio: 1 / 0.8;  
+  object-fit: cover;       
+}
+
+/* --- CORES DAS BOLINHAS SEGUNDO O STATUS --- */
+
+/* VERDE: Disponível */
+.status-disponivel .status-dot {
+  background-color: var(--disponivel); 
+  box-shadow: 0 0 8px #2ECC71; /* Efeito opcional de leve brilho */
+}
+
+/* AMARELO: Em uso */
+.status-em-uso .status-dot {
+  background-color: var(--uso);
+  box-shadow: 0 0 8px #F1C40F;
+}
+
+/* LARANJA: Manutenção */
+.status-manutencao .status-dot {
+  background-color: var(--manutencao);
+  box-shadow: 0 0 8px #E67E22;
 }
