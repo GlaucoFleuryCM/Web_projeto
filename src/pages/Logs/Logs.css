@@ -1,11 +1,11 @@
 .page-title-top {
-    color: #013185;
+    color: var(--azul-calmart);
     margin-top: 20px;
     margin-bottom: 30px;
 }
 
 .page-title-table { 
-    color: #013185;
+    color: var(--azul-calmart);
     font-size: 25px;
 }
 
@@ -103,6 +103,7 @@
 
 .paginas button.active {
     background-color: var(--areia-hover);
+    border: 3px solid black;
 }
 
 .log-recente {

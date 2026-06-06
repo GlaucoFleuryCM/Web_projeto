@@ -1,45 +1,63 @@
 import { useState } from "react";
+import ListaGerenciamento from "../../components/listaGerenciamento";
 import "./Gerenciar.css"
+
 
 const Gerenciar = () => {
 
+    const [search, setSearch] = useState("");
+        
     // 0 - Motoristas
     // 1 - Veículos
     // 2 - Motivos
     const [escopo, setEscopo] = useState(0);
-    const [motoristas, setMotoristas] = useState([]);
-    const [veiculos, setVeiculos] = useState([]);
-    const [motivos, setMotivos] = useState([]);
-    
+    const [dados, setDados] = useState({
+        motoristas: ["motorista1", "motorista2"],
+        veiculos: [],
+        motivos: []
+    });
     const [nome, setNome] = useState("");
     const [placa, setPlaca] = useState("");
     const [motivo, setMotivo] = useState("");
 
     const handleSubmit0 = (e) => {
         e.preventDefault();
-        setMotoristas([...motoristas, nome]);
+
+        setDados(prev => ({
+            ...prev,
+            motoristas: [...prev.motoristas, nome]
+        }));
+
+        setNome("");
+        
+        console.log(nome)
     };
-    const handleDelete0 = (index) => {
-        const novaLista = motoristas.filter((_, i) => i !== index);
-        setMotoristas(novaLista);
-    };
-    
     const handleSubmit1 = (e) => {
         e.preventDefault();
-        setVeiculos([...veiculos, placa]);
-    };
-    const handleDelete1 = (index) => {
-        const novaLista = veiculos.filter((_, i) => i !== index);
-        setVeiculos(novaLista);
-    };
 
+        setDados(prev => ({
+            ...prev,
+            veiculos: [...prev.veiculos, placa]
+        }));
+
+        setPlaca("");
+    };
     const handleSubmit2 = (e) => {
         e.preventDefault();
-        setMotivos([...motivos, motivo]);
+
+        setDados(prev => ({
+            ...prev,
+            motivos: [...prev.motivos, motivo]
+        }));
+
+        setMotivo("");
     };
-    const handleDelete2 = (index) => {
-        const novaLista = motivos.filter((_, i) => i !== index);
-        setMotivos(novaLista);
+
+    const removerItem = (categoria, index) => {
+        setDados(prev => ({
+            ...prev,
+            [categoria]: prev[categoria].filter((_, i) => i !== index)
+        }));
     };
 
     return (
@@ -112,42 +130,21 @@ const Gerenciar = () => {
                         <button className="submit" type="submit">Cadastrar</button>
                     </form>
 
-                    <ul className="vizualização">
-                        <li>
-                            <span>Motorista 1</span>
-                            <button className="delete-btn" onClick={() => {}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorista 2</span>
-                            <button className="delete-btn" onClick={() => {}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorista 3</span>
-                            <button className="delete-btn" onClick={() => {}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motorista 4</span>
-                            <button className="delete-btn" onClick={() => {}}>
-                                &times;
-                            </button>
-                        </li>
-                        {motoristas.map((m, i) => (
-                            <li key={i}>
-                                <span>{m}</span>
-                                <button 
-                                className="delete-btn"
-                                type="button" onClick={() => handleDelete0(i)}>
-                                    &times;
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="data">
+                        <input
+                            type="text"
+                            placeholder="Buscar..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="search-bar"
+                        />
+
+                        <ListaGerenciamento
+                            itens={dados.motoristas}
+                            onDelete={(index) => removerItem("motoristas", index)}
+                            search={search}
+                        />
+                    </div>
                 </div>
             )}
 
@@ -205,36 +202,21 @@ const Gerenciar = () => {
                         <button className="submit" type="submit">Cadastrar</button>
                     </form>
                     
-                    <ul className="vizualização">
-                        <li>
-                            <span>Veiculo 1</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Veiculo 2</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Veiculo 3</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        {veiculos.map((m, i) => (
-                            <li key={i}>
-                                <span>{m}</span>
-                                <button 
-                                className="delete-btn"
-                                type="button" onClick={() => handleDelete1(i)}>
-                                    &times;
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="data">
+                        <input
+                            type="text"
+                            placeholder="Buscar..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="search-bar"
+                        />
+
+                        <ListaGerenciamento
+                            itens={dados.veiculos}
+                            onDelete={(index) => removerItem("veiculos", index)}
+                            search={search}
+                        />
+                    </div>
                 </div>
             )}
 
@@ -256,37 +238,21 @@ const Gerenciar = () => {
                         <button className="submit" type="submit">Cadastrar</button>
                     
                     </form>
-                    
-                    <ul className="vizualização">
-                        <li>
-                            <span>Motivo 1</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motivo 2</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        <li>
-                            <span>Motivo 3</span>
-                            <button className="delete-btn" onClick={() => {/* função de deletar */}}>
-                                &times;
-                            </button>
-                        </li>
-                        {motivos.map((m, i) => (
-                            <li key={i}>
-                                <span>{m}</span>
-                                <button 
-                                className="delete-btn"
-                                type="button" onClick={() => handleDelete2(i)}>
-                                    &times;
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="data">
+                        <input
+                            type="text"
+                            placeholder="Buscar..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="search-bar"
+                        />
+
+                        <ListaGerenciamento
+                            itens={dados.motivos}
+                            onDelete={(index) => removerItem("motivos", index)}
+                            search={search}
+                        />
+                    </div>
                 </div>
             )}
         </div>

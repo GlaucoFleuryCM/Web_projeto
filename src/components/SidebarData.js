@@ -17,7 +17,7 @@ export const SidebarData = [
 
         subNav: [
             {
-                title: "Movimentações Recentes",
+                title: "Movimentações Ativas",
                 path: "/logs/recente",
                 icon: <IoIosPaper />,
             },

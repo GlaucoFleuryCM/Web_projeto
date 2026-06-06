@@ -14,13 +14,14 @@ code {
 
 :root {
     --azul-calmart: #013185;
+    --azul-claro: #1E5BB8;
     --branco: #f0f0f0;
     --preto: #222;
     --border-color: #414166;
     --areia: #F1F1E6;
     --border-areia: #babaae;
     --areia-hover: #FFF7D6;
-    --background-color: #fff;
+    --background-color: #F5F7FA;
 
     --manutencao: #E67E22;
     --uso: #F1C40F;

@@ -22,17 +22,18 @@ const Card = ({ data }) => {
               <span className="status-dot"></span>
               <span className="status-text">{data.status}</span>
               <span className="status-dot"></span>
-
             </div>
 
             <img src={data.img} alt="Veículo" className="vehicle-image" />
 
             <div className="card-text">
-                <p>{data.info}</p>
-                <p><strong>Motorista:</strong> {data.motorista}</p>
-                <p><strong>Modelo:</strong> {data.modelo}</p>
-                <p><strong>Placa:</strong> {data.placa}</p>
+              <p>{data.info}</p>
+              <p><strong>Motorista:</strong> {data.motorista}</p>
+              <p><strong>Modelo:</strong> {data.modelo}</p>
+              <p><strong>Placa:</strong> {data.placa}</p>
             </div>
+
+            <button className="btn-manutencao"> Manutenção </button>
         </div>
     );
 };

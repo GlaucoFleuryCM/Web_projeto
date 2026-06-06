@@ -37,6 +37,7 @@ const Veiculos = () => {
             placa: "FBJ4E12"
         }
     ];
+    
     // What user wats to see: gfilter by 'placa'
     const filteredSlides = SLIDES.filter((slide) =>
         slide.placa.toLowerCase().includes(search.toLowerCase())
@@ -49,7 +50,7 @@ const Veiculos = () => {
     };
 
     const sortedAndFilteredSlides = filteredSlides.sort((a, b) => {
-        const orderA = statusOrder[a.status] || 4; // Se não achar o status, joga pro final (4)
+        const orderA = statusOrder[a.status] || 4;
         const orderB = statusOrder[b.status] || 4;
         return orderA - orderB;
     });

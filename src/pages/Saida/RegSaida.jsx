@@ -4,7 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 
 const Saida = () => {
+
     const [saidaManual, setSaidaManual] = useState(false);
+    const [search, setSearch] = useState("");
 
     const [formData, setFormData] = useState({
         veiculo: "",
@@ -169,9 +171,14 @@ const Saida = () => {
             </form>
                 
             {showMessage && (
-                <span className="success-message">
-                    Registro Concluído Com Sucesso
-                </span>
+                <div className="toast-success">
+                    <div className="toast-icon">✓</div>
+
+                    <div>
+                        <span className="saida-info">Saída registrada</span>
+                        <p>{formData.veiculo}</p>
+                    </div>
+                </div>
             )}
         </div>
 

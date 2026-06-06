@@ -1,6 +1,6 @@
 .card {
   width: 500px;
-  height: 520px;
+  height: 540px;
 
   background-color: var(--azul-calmart);
   border: 3px solid var(--border-color);
@@ -43,7 +43,7 @@
   color: var(--branco);
   text-align: left;    
   
-  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .card-text p {
@@ -61,12 +61,18 @@
   object-fit: cover;       
 }
 
+.btn-manutencao {
+  padding: 0.5rem 0.8rem;
+
+  margin-left: auto;
+}
+
 /* --- CORES DAS BOLINHAS SEGUNDO O STATUS --- */
 
 /* VERDE: Disponível */
 .status-disponivel .status-dot {
   background-color: var(--disponivel); 
-  box-shadow: 0 0 8px #2ECC71; /* Efeito opcional de leve brilho */
+  box-shadow: 0 0 8px #2ECC71;
 }
 
 /* AMARELO: Em uso */

@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaDoorOpen } from "react-icons/fa";
 
+import calmartLogo from "../assets/calmart.jpeg";
+
 const Top = styled.div`
     background: #013185;
     height: 80px;
@@ -23,9 +25,12 @@ const Top = styled.div`
 const Topbar = ({ setIsLoggedIn}) => {
     return (
         <Top>
-            <h1 style={{ color: "white", fontSize: "2rem", fontWeight: "bold", paddingLeft: "40px"}}>
-                Calmart
-            </h1>
+            <img
+                src={calmartLogo}
+                alt="Calmart"
+                className="topbar-logo"
+                style={{height: "50px", width: "auto", objectFit:"contain"}}
+            />
 
             <div style={{marginLeft:"auto", display:"flex", flexDirection:"row", gap:"2rem", alignItems:"center"}}>
                 <span style={{ color: "white", fontSize: "1.6rem", fontWeight: "bold"}}>
