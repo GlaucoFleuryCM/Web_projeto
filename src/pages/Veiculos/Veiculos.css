@@ -1,0 +1,33 @@
+.carousel-wrapper {
+  display: flex;
+  padding: 1.5rem;
+  padding-top: 0;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 100%;
+}
+
+.carousel-wrapper .search-container{
+  padding: 1.5rem 0;
+}
+
+.container-embla::before {
+  content: '';
+  flex: 3;
+}
+
+@media (max-width: 800px) {
+  .container-embla {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container-embla::before {
+    display: none; 
+  }
+  
+  .embla {
+    width: 100%;
+  }
+}

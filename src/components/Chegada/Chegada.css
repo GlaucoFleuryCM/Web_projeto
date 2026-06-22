@@ -1,0 +1,36 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.btn-cancelar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    background: var(--branco);
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: .2rem .4rem;    
+
+    color: red;
+}
+
+.btn-cancelar:hover {
+    color: red;
+}

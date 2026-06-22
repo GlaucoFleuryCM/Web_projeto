@@ -1,0 +1,123 @@
+.page-title-top {
+    color: var(--azul-calmart);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.page-title-table { 
+    color: var(--azul-calmart);
+    font-size: 25px;
+}
+
+.lower-title {
+    margin-bottom: 20px;
+}
+
+.lower-title span {
+    margin-left: 15px;
+}
+
+.log-btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    background-color: #F1F1E6;
+    border-color: #babaae;
+    cursor: pointer;
+
+}
+
+.log-btn:hover {
+    background-color: #FFF7D6;
+}
+
+.table-wrapper {
+    border-radius: 5px;
+    border: none;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.table-wrapper table th {
+  background-color: #4253AE;
+  color: var(--branco);
+  text-align: center;
+  border: 1px solid var(--azul-calmart);
+  padding: 12px;
+}
+
+.table-wrapper table td {
+    background-color: rgb(228, 236, 255);
+    color: black;
+    text-align: center;
+    border: 1px solid var(--azul-calmart);
+    padding: 5px;
+}
+
+.table-wrapper table tr.active td {
+    background-color: rgb(244, 255, 199);
+    color: black;
+    text-align: center;
+    border: 1px solid var(--azul-calmart);
+    padding: 5px;
+}
+
+.table-wrapper table tr.unactive td {
+    background-color: rgb(199, 255, 215);
+    color: black;
+    text-align: center;
+    border: 1px solid var(--azul-calmart);
+    padding: 5px;
+}
+
+#container-tabelas {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.paginas {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.paginas button {
+    padding: 6px 12px;
+    border: 1px solid black;
+    background-color: var(--areia);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.paginas button:hover {
+    background-color: var(--areia-hover);
+}
+
+.paginas button.active {
+    background-color: var(--areia-hover);
+    border: 3px solid black;
+}
+
+.log-recente {
+    width: 70%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.log-geral {
+    width: 70%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.log-geral .search-container {
+    padding: 1rem 0;
+}
