@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaDoorOpen } from "react-icons/fa";
-
 import calmartLogo from "../assets/calmart.jpeg";
 
 const Top = styled.div`
@@ -22,25 +20,22 @@ const Top = styled.div`
     z-index: 10;
 `;
 
-const Topbar = ({ setIsLoggedIn}) => {
+const Topbar = ({ onLogout, nomeUsuario }) => {
     return (
         <Top>
             <img
                 src={calmartLogo}
                 alt="Calmart"
                 className="topbar-logo"
-                style={{height: "50px", width: "auto", objectFit:"contain"}}
+                style={{ height: "50px", width: "auto", objectFit: "contain" }}
             />
 
-            <div style={{marginLeft:"auto", display:"flex", flexDirection:"row", gap:"2rem", alignItems:"center"}}>
-                <span style={{ color: "white", fontSize: "1.6rem", fontWeight: "bold"}}>
-                    Severino Manoel da Silva Neto
+            <div style={{ marginLeft: "auto", display: "flex", flexDirection: "row", gap: "2rem", alignItems: "center" }}>
+                <span style={{ color: "white", fontSize: "1.6rem", fontWeight: "bold" }}>
+                    {nomeUsuario}
                 </span>
                 <Link to="/login">
-                    <figure
-                        onClick={() => setIsLoggedIn(false)} 
-                        style={{ cursor: "pointer" }}
-                        >
+                    <figure onClick={onLogout} style={{ cursor: "pointer" }}>
                         <FaDoorOpen fontSize={"40px"} color="white" />
                     </figure>
                 </Link>

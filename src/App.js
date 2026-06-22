@@ -24,7 +24,7 @@ import logo from "./assets/logo.png";
 const MainContent = styled.div`
     margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
     padding-top: 80px;
-    transition: margin-left 0.5s ease; 
+    transition: margin-left 0.5s ease;
 
     display: flex;
     flex-direction: column;
@@ -35,25 +35,31 @@ const MainContent = styled.div`
     overflow: hidden;
 `;
 
-// wrapper: React needs to return only one component
-const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn }) => {
+const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, nomeUsuario, setNomeUsuario }) => {
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('nomeUsuario');
+        setIsLoggedIn(false);
+        setNomeUsuario('');
+    };
+
     return (
         <Routes>
-            <Route 
-                path="/login" 
+            <Route
+                path="/login"
                 element={
-                    isLoggedIn 
-                        ? <Navigate to="/veiculos" /> 
-                        : <LoginPage setIsLoggedIn={setIsLoggedIn} />
-                } 
+                    isLoggedIn
+                        ? <Navigate to="/veiculos" />
+                        : <LoginPage setIsLoggedIn={setIsLoggedIn} setNomeUsuario={setNomeUsuario} />
+                }
             />
             <Route
                 path="/*"
                 element={
                     isLoggedIn ? (
                         <>
-                            <Topbar setIsLoggedIn={setIsLoggedIn} />
-                            <Sidebar 
+                            <Topbar onLogout={handleLogout} nomeUsuario={nomeUsuario} />
+                            <Sidebar
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={setSidebarOpen}
                             />
@@ -79,15 +85,18 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn }) 
 
 function App() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+    const [nomeUsuario, setNomeUsuario] = useState(localStorage.getItem('nomeUsuario') || '');
 
     return (
         <Router>
-            <AppContent 
-                sidebarOpen={sidebarOpen} 
+            <AppContent
+                sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
+                nomeUsuario={nomeUsuario}
+                setNomeUsuario={setNomeUsuario}
             />
         </Router>
     );

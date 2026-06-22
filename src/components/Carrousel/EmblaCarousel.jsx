@@ -10,7 +10,7 @@ import Card from './Card'
 import './card.css'
 
 const EmblaCarousel = (props) => {
-  const { slides, options } = props
+  const { slides, options, onToggleManutencao } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -46,7 +46,7 @@ const EmblaCarousel = (props) => {
           <div className="embla__container">
             {slides.map((slide, index) => (
               <div className="embla__slide" key={index}>
-                  <Card data={slide} />
+                  <Card data={slide} onToggleManutencao={onToggleManutencao} />
               </div>
             ))}
           </div>

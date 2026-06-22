@@ -1,40 +1,35 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { FaUserAltSlash } from "react-icons/fa";
-import { CiNoWaitingSign } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 import "./LoginPage.css";
 
-const LoginPage = ({setIsLoggedIn}) => {
+const LoginPage = ({ setIsLoggedIn, setNomeUsuario }) => {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    // essa Handle do JS lida com os Erros da Pagina 
-    // (nós definimos quando dá erro)
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
+        setLoading(true);
 
-        // Dummy value: Seu Severino (Galo Cego)
-        const dummyUser = {
-            username: "Severino Manoel da Silva Neto",
-            password: "1234"
-        };
-
-        if (username !== dummyUser.username) {
-            setError("ERRO: usuário inexistente!");
-            return;
+        try {
+            const { data } = await api.post('/auth/login', { username, password });
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('nomeUsuario', data.nome);
+            setNomeUsuario(data.nome);
+            setIsLoggedIn(true);
+            navigate("/veiculos");
+        } catch (err) {
+            const msg = err.response?.data?.message || "Erro ao conectar com o servidor";
+            setError(`ERRO: ${msg}`);
+        } finally {
+            setLoading(false);
         }
-        if (password !== dummyUser.password) {
-            setError("ERRO: senha incorreta!");
-            return;
-        }
-
-        // sucesso em validacao (s/erro)
-        setIsLoggedIn(true);  
-        navigate("/"); 
     };
 
     return (
@@ -44,30 +39,33 @@ const LoginPage = ({setIsLoggedIn}) => {
                     <FaUser className="icon" />
                     <span>Preencha as informações abaixo:</span>
                 </div>
-                
+
                 <div className="input-group">
                     <label>USUÁRIO</label>
-                    <input 
+                    <input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
 
                 <div className="input-group">
                     <label>SENHA</label>
-                    <input 
+                    <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
 
-                {/* Erro */}
                 {error && <div className="error-message">{error}</div>}
 
                 <div className="confirm-container">
-                    <button type="submit">Confirmar</button>
+                    <button type="submit" disabled={loading}>
+                        {loading ? "Entrando..." : "Confirmar"}
+                    </button>
                 </div>
             </form>
         </div>

@@ -1,133 +1,72 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Chegada from "../../components/Chegada/Chegada";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import { useState } from "react";
 import { FaCircle } from "react-icons/fa";
+import api from "../../services/api";
+import './Logs.css';
+import '../../index.css';
 
-import './Logs.css'
-import '../../index.css'
-
-const registroGeral = [
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "24/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "23/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "22/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Douglas", veiculo: "carro4", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "21/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Eduardo", veiculo: "carro5", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "20/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Fabio", veiculo: "carro6", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "19/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Gustavo", veiculo: "carro7", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "18/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Henrique", veiculo: "carro8", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "17/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Igor", veiculo: "carro9", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "16/04/2026 xx:xx", observacoes: ""},
-        {motorista: "Jonas", veiculo: "carro10", motivo: "Motivo X", destino: "Birigui",
-                                odometro: "111.111", saida: "15/04/2026 xx:xx", observacoes: ""},
-    ]
+const formatarData = (iso) => {
+    if (!iso) return "—";
+    return new Date(iso).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+};
 
 export const LogRecente = () => {
+    const [registrosAtivos, setRegistrosAtivos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [erro, setErro] = useState("");
+    const [modalAberto, setModalAberto] = useState(false);
+    const [registroSelecionado, setRegistroSelecionado] = useState(null);
 
-    // Registros Ativos contém os carros que estão sendo usados agora
-    const [registroAtivos, setRegistroAtivos] = useState([
-        {motorista: "Adriano", veiculo: "carro1", motivo: "Motivo X",
-            destino: "Birigui", saida: "24/04/2026 xx:xx", estimada: "24/04/2026 yy:yy", active: "1"},
-        {motorista: "Beto", veiculo: "carro2", motivo: "Motivo X",
-            destino: "Birigui", saida: "23/04/2026 xx:xx", estimada: "23/04/2026 yy:yy", active: "1"},
-        {motorista: "Carlos", veiculo: "carro3", motivo: "Motivo X",
-            destino: "Birigui", saida: "22/04/2026 xx:xx", estimada: "22/04/2026 yy:yy", active: "1"},
-    ])
+    const carregarAtivos = useCallback(async () => {
+        setErro("");
+        try {
+            const { data } = await api.get('/movimentos/ativos');
+            setRegistrosAtivos(data);
+        } catch {
+            setErro("Erro ao carregar movimentações ativas.");
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
-    const [modalAberto, setModalAberto] = useState(false)
-    const [registroSelecionado, setRegistroSelecionado] = useState(null)
+    useEffect(() => {
+        carregarAtivos();
+    }, [carregarAtivos]);
 
-    const [dataChegada, setDataChegada] = useState("")
-    const [odometro, setOdometro] = useState("")
-    const [observacoes, setObservacoes] = useState("")
+    const confirmarChegada = (registro) => {
+        setRegistroSelecionado(registro);
+        setModalAberto(true);
+    };
 
-    const confirmarChegada = (index) => {
-        setRegistroSelecionado(registroAtivos[index])
-        setModalAberto(true)
-    }
-
-    const finalizarRetorno = (dados) => {
-        console.log("retorno finalizado", dados);
-        setModalAberto(false);
+    const finalizarRetorno = async (dados) => {
+        try {
+            await api.post(`/movimentos/${registroSelecionado._id}/chegada`, {
+                dataChegada: dados.dataChegada.toISOString(),
+                odometroChegada: dados.odometro,
+                observacoes: dados.observacoes,
+            });
+            setRegistrosAtivos((prev) => prev.filter((r) => r._id !== registroSelecionado._id));
+            setModalAberto(false);
+            setRegistroSelecionado(null);
+        } catch (err) {
+            alert(err.response?.data?.message || "Erro ao registrar chegada.");
+        }
     };
 
     return (
         <div className="log-recente">
             <h1 className="page-title-top">Movimentações Ativas</h1>
             <div id="container-tabelas">
-                {registroAtivos.length !== 0 &&
-                    (
+                {loading && <p style={{ textAlign: "center" }}>Carregando...</p>}
+                {erro && <p style={{ color: "red" }}>{erro}</p>}
+
+                {!loading && registrosAtivos.length === 0 && !erro && (
+                    <p style={{ textAlign: "center", marginTop: "2rem" }}>Nenhuma movimentação ativa no momento.</p>
+                )}
+
+                {!loading && registrosAtivos.length > 0 && (
                     <div className="table-wrapper">
                         <table className="ativos">
                             <thead>
@@ -142,21 +81,18 @@ export const LogRecente = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {registroAtivos.map((reg, index) => (
-                                    <tr key={index}>
-                                        <td>{reg.motorista}</td>
-                                        <td>{reg.veiculo}</td>
-                                        <td>{reg.motivo}</td>
+                                {registrosAtivos.map((reg) => (
+                                    <tr key={reg._id}>
+                                        <td>{reg.motorista?.nome}</td>
+                                        <td>{reg.veiculo?.modelo} — {reg.veiculo?.placa}</td>
+                                        <td>{reg.motivo?.motivo}</td>
                                         <td>{reg.destino}</td>
-                                        <td>{reg.saida}</td>
-                                        <td>{reg.estimada}</td>
+                                        <td>{formatarData(reg.saida)}</td>
+                                        <td>{formatarData(reg.retornoEstimado)}</td>
                                         <td>
-                                            {reg.active === "1" && (
-                                                <button className="log-btn" 
-                                                        onClick={() => confirmarChegada(index)}>
-                                                    Confirmar
-                                                </button>
-                                            )}
+                                            <button className="log-btn" onClick={() => confirmarChegada(reg)}>
+                                                Confirmar
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -177,142 +113,141 @@ export const LogRecente = () => {
 };
 
 export const LogGeral = () => {
+    const [todos, setTodos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [erro, setErro] = useState("");
+    const [busca, setBusca] = useState("");
+    const [data, setData] = useState(0); // 0=todas,1=semana,2=quinzena,3=mês,4=custom
+    const [dataPersonalizada, setDataPersonalizada] = useState(null);
+    const [paginaAtual, setPaginaAtual] = useState(1);
+    const itensPagina = 15;
 
-    const [busca, setBusca] = useState("")
-    const [data, setData] = useState(0) // 0 = todas 1 = semana, 2 = 15 dias, 3 = mês, 4 = custom
-    const [dataPersonalizada, setDataPersonalizada] = useState(null)
-    const classeBotaoData = (valor) => `time-btn ${data === valor ? "active" : ""}`;
+    const carregarHistorico = useCallback(async () => {
+        setLoading(true);
+        setErro("");
+        try {
+            const params = {};
+            if (data === 1) params.periodo = 'semana';
+            else if (data === 2) params.periodo = 'quinzena';
+            else if (data === 3) params.periodo = 'mes';
+            else if (data === 4 && dataPersonalizada) {
+                params.dataInicio = dataPersonalizada.toISOString().split('T')[0];
+                params.dataFim = dataPersonalizada.toISOString().split('T')[0];
+            }
 
-    const termos = busca
-    .toLowerCase()
-    .split(" ")
-    .filter(t => t !== "")
+            const { data: resposta } = await api.get('/movimentos/historico', { params });
+            setTodos(resposta);
+        } catch {
+            setErro("Erro ao carregar histórico.");
+        } finally {
+            setLoading(false);
+        }
+    }, [data, dataPersonalizada]);
 
-    const registrosFiltrados = registroGeral.filter((reg) => {
-        const texto = `
-            ${reg.motorista}
-            ${reg.veiculo}
-            ${reg.origem}
-            ${reg.destino}
-            ${reg.saida}
-        `.toLowerCase()
+    useEffect(() => {
+        carregarHistorico();
+        setPaginaAtual(1);
+    }, [carregarHistorico]);
 
-        return termos.every(termo => texto.includes(termo))
-    })
-    
-    const parseData = (texto) => {
-        const [data] = texto.split(" ")
-        const [dia, mes, ano] = data.split("/")
+    const termos = busca.toLowerCase().split(" ").filter(Boolean);
 
-        return new Date(ano, mes - 1, dia)
-    }
+    const filtrados = todos.filter((reg) => {
+        const texto = [
+            reg.motorista?.nome,
+            reg.veiculo?.placa,
+            reg.veiculo?.modelo,
+            reg.destino,
+            reg.motivo?.motivo,
+        ].join(' ').toLowerCase();
+        return termos.every((t) => texto.includes(t));
+    });
 
-    const [paginaAtual, setPaginaAtual] = useState(1)
-    const itensPagina = 15
-    const indexFinal = paginaAtual * itensPagina
-    const indexInicial = indexFinal - itensPagina
-    const registroShowing = registrosFiltrados.slice(indexInicial, indexFinal)
-    const totalPaginas = Math.ceil(registrosFiltrados.length / itensPagina)
-    const classeBotaoPagina = (pagina) =>paginaAtual === pagina ? "pagina-btn active" : "pagina-btn";
+    const totalPaginas = Math.ceil(filtrados.length / itensPagina);
+    const inicio = (paginaAtual - 1) * itensPagina;
+    const mostrando = filtrados.slice(inicio, inicio + itensPagina);
 
-
-    const montarFiltros = () => ({
-        busca,
-        periodo: data,
-        dataPersonalizada,
-        pagina: paginaAtual,
-        itensPagina
-    })
+    const classeBotaoData = (v) => `time-btn ${data === v ? "active" : ""}`;
+    const classeBotaoPagina = (p) => `pagina-btn ${paginaAtual === p ? "active" : ""}`;
 
     return (
         <div className="log-geral">
-
             <h1 className="page-title">Todas Movimentações</h1>
 
             <div className="search-container">
-                <input
-                    className="search-bar"
-                    type="text"
-                    placeholder="Buscar..."
-                    value={busca}
-                    onChange={(e) => {
-                        setBusca(e.target.value)
-                        setPaginaAtual(1)
-                    }}
-                />
+                <input className="search-bar" type="text" placeholder="Buscar..."
+                    value={busca} onChange={(e) => { setBusca(e.target.value); setPaginaAtual(1); }} />
 
                 <div className="tooltip-container">
                     <span className="tooltip-icon">?</span>
                     <span className="tooltip-text">
                         Digite palavras para filtrar os resultados (motorista, veículo, etc).
-                        É possível usar múltiplos termos separados por espaço para refinar a busca.
+                        É possível usar múltiplos termos separados por espaço.
                     </span>
                 </div>
-                
+
                 <div className="time-btns">
-                    <button className={classeBotaoData(1)} onClick={() => setData(1)}>Última Semana</button>
-                    <button className={classeBotaoData(2)} onClick={() => setData(2)}>Últimos 15 dias</button>
-                    <button className={classeBotaoData(3)} onClick={() => setData(3)}>Último Mês</button>
+                    <button className={classeBotaoData(1)} onClick={() => { setData(1); setPaginaAtual(1); }}>Última Semana</button>
+                    <button className={classeBotaoData(2)} onClick={() => { setData(2); setPaginaAtual(1); }}>Últimos 15 dias</button>
+                    <button className={classeBotaoData(3)} onClick={() => { setData(3); setPaginaAtual(1); }}>Último Mês</button>
                     <DatePicker
                         className={`time-btn ${data === 4 ? "active" : ""}`}
                         placeholderText="Outra Data"
                         selected={dataPersonalizada}
-                        onChange={(date) => {
-                            setDataPersonalizada(date)
-                            setData(4)
-                        }}
+                        onChange={(d) => { setDataPersonalizada(d); setData(4); setPaginaAtual(1); }}
                         maxDate={new Date()}
-                        dateFormat="dd/MM/yyyy">
-                    </DatePicker>
-                    <button className={classeBotaoData(0)} onClick={() => {
-                        setData(0)
-                        setDataPersonalizada(null)
-                    }}>Todas</button>
+                        dateFormat="dd/MM/yyyy"
+                    />
+                    <button className={classeBotaoData(0)} onClick={() => { setData(0); setDataPersonalizada(null); setPaginaAtual(1); }}>Todas</button>
                 </div>
             </div>
 
-            <div className="table-wrapper">
-                <table className="total">
-                    <thead>
-                        <tr>
-                            <th>Motorista</th>
-                            <th>Veículo</th>
-                            <th>Motivo</th>
-                            <th>Destino</th>
-                            <th>Odômetro</th>
-                            <th>Saída</th>
-                            <th>Observações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {registroShowing.map((reg, index) => (
-                            <tr key={index}>
-                                <td>{reg.motorista}</td>
-                                <td>{reg.veiculo}</td>
-                                <td>{reg.motivo}</td>
-                                <td>{reg.destino}</td>
-                                <td>{reg.odometro}</td>
-                                <td>{reg.saida}</td>
-                                <td>{reg.observacoes}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            
-            {registrosFiltrados.length > itensPagina && (
-            <div className="paginas">
-                {Array.from({ length: totalPaginas }, (_, i) => (
-                    <button
-                        key={i}
-                        className={classeBotaoPagina(i + 1)}
-                        onClick={() => setPaginaAtual(i + 1)}
-                    >
-                        {i + 1}
-                    </button>
-                ))}
-            </div>
-        )}
+            {loading && <p style={{ textAlign: "center", marginTop: "2rem" }}>Carregando...</p>}
+            {erro && <p style={{ color: "red", textAlign: "center" }}>{erro}</p>}
+
+            {!loading && (
+                <>
+                    <div className="table-wrapper">
+                        <table className="total">
+                            <thead>
+                                <tr>
+                                    <th>Motorista</th>
+                                    <th>Veículo</th>
+                                    <th>Motivo</th>
+                                    <th>Destino</th>
+                                    <th>Odômetro (km)</th>
+                                    <th>Saída</th>
+                                    <th>Observações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {mostrando.length === 0 ? (
+                                    <tr><td colSpan={7} style={{ textAlign: "center" }}>Nenhum registro encontrado.</td></tr>
+                                ) : mostrando.map((reg) => (
+                                    <tr key={reg._id}>
+                                        <td>{reg.motorista?.nome}</td>
+                                        <td>{reg.veiculo?.modelo} — {reg.veiculo?.placa}</td>
+                                        <td>{reg.motivo?.motivo}</td>
+                                        <td>{reg.destino}</td>
+                                        <td>{reg.odometroChegada?.toLocaleString() ?? "—"}</td>
+                                        <td>{formatarData(reg.saida)}</td>
+                                        <td>{reg.observacoes || "—"}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {filtrados.length > itensPagina && (
+                        <div className="paginas">
+                            {Array.from({ length: totalPaginas }, (_, i) => (
+                                <button key={i} className={classeBotaoPagina(i + 1)} onClick={() => setPaginaAtual(i + 1)}>
+                                    {i + 1}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </>
+            )}
         </div>
     );
 };

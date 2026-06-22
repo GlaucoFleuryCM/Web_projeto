@@ -2,104 +2,79 @@ import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "./Chegada.css";
 
-export default function Chegada({aberto, registro, onClose, onFinalizar}) {
-
+export default function Chegada({ aberto, registro, onClose, onFinalizar }) {
     const [dataChegada, setDataChegada] = useState(new Date());
     const [odometro, setOdometro] = useState("");
     const [observacoes, setObservacoes] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (aberto) {
             setDataChegada(new Date());
-            setOdometro("");
+            setOdometro(registro?.odometroSaida ?? "");
             setObservacoes("");
         }
     }, [aberto]);
 
     if (!aberto || !registro) return null;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        onFinalizar({
-            ...registro,
-            dataChegada,
-            odometro,
-            observacoes
-        });
+        setLoading(true);
+        try {
+            await onFinalizar({ dataChegada, odometro, observacoes });
+        } finally {
+            setLoading(false);
+        }
     };
+
+    const formatarData = (iso) =>
+        iso ? new Date(iso).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : "—";
 
     return (
         <div className="modal-overlay">
             <form className="form" onSubmit={handleSubmit}>
-
-                <button
-                    type="button"
-                    className="btn-cancelar"
-                    onClick={onClose}
-                >
-                    X
-                </button>
+                <button type="button" className="btn-cancelar" onClick={onClose}>X</button>
 
                 <h2>Finalizar Retorno</h2>
 
                 <div className="form-group">
                     <label>
                         Motorista:
-                        <span className="fixed">
-                            {registro.motorista}
-                        </span>
+                        <span className="fixed">{registro.motorista?.nome}</span>
                     </label>
-
                     <label>
                         Veículo:
-                        <span className="fixed">
-                            {registro.veiculo}
-                        </span>
+                        <span className="fixed">{registro.veiculo?.modelo} — {registro.veiculo?.placa}</span>
                     </label>
-
                     <label>
                         Motivo:
-                        <span className="fixed">
-                            {registro.motivo}
-                        </span>
+                        <span className="fixed">{registro.motivo?.motivo}</span>
                     </label>
-
                     <label>
                         Data de saída:
-                        <span className="fixed">
-                            {registro.saida}
-                        </span>
+                        <span className="fixed">{formatarData(registro.saida)}</span>
                     </label>
-
                     <label>
-                        Último Valor do Odômetro:
-                        <span className="fixed">
-                            110.710
-                        </span>
+                        Último Odômetro:
+                        <span className="fixed">{registro.odometroSaida?.toLocaleString() ?? "—"} km</span>
                     </label>
                 </div>
 
                 <div className="form-group">
                     <label>Data de chegada:</label>
-
                     <DatePicker
                         selected={dataChegada}
                         onChange={setDataChegada}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        dateFormat="dd/MM/yyyy HH:mm"
-                        className="form-field"
+                        showTimeSelect timeFormat="HH:mm" timeIntervals={15}
+                        dateFormat="dd/MM/yyyy HH:mm" className="form-field"
                     />
                 </div>
 
                 <div className="form-group">
-                    <label>Odômetro:</label>
-
-                    <input
-                        className="form-field"
-                        type="number"
+                    <label>Odômetro (km):</label>
+                    <input className="form-field" type="number" required
+                        min={registro.odometroSaida ?? 0}
                         value={odometro}
                         onChange={(e) => setOdometro(e.target.value)}
                     />
@@ -107,21 +82,15 @@ export default function Chegada({aberto, registro, onClose, onFinalizar}) {
 
                 <div className="form-group">
                     <label>Observações:</label>
-
-                    <textarea
-                        className="form-field"
-                        rows={3}
+                    <textarea className="form-field" rows={3}
                         value={observacoes}
-                        onChange={(e) =>
-                            setObservacoes(e.target.value)
-                        }
+                        onChange={(e) => setObservacoes(e.target.value)}
                     />
                 </div>
 
-                <button className="submit" type="submit">
-                    Finalizar retorno
+                <button className="submit" type="submit" disabled={loading}>
+                    {loading ? "Salvando..." : "Finalizar retorno"}
                 </button>
-
             </form>
         </div>
     );
