@@ -1,8 +1,8 @@
 import "./App.css";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Sidebar from "./components/Sidebar";
-import Topbar from "./components/Topbar";
+import Sidebar from "./components/Sidebar.js";
+import Topbar from "./components/Topbar.js";
 import {
     BrowserRouter as Router,
     Routes,
@@ -14,10 +14,10 @@ import {
 } from "./pages/Logs/Logs.jsx";
 import { useLocation, Navigate } from "react-router-dom";
 
-import Saida from "./pages/Saida/RegSaida";
+import Saida from "./pages/Saida/RegSaida.jsx";
 import Veiculos from "./pages/Veiculos/Veiculos.jsx";
-import LoginPage from "./login_page/LoginPage";
-import Gerenciar from "./pages/Gerenciar/Gerenciar";
+import LoginPage from "./login_page/LoginPage.jsx";
+import Gerenciar from "./pages/Gerenciar/Gerenciar.jsx";
 
 import logo from "./assets/logo.png";
 
