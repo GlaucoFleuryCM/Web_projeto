@@ -12,7 +12,7 @@ const movimentoSchema = new mongoose.Schema(
     chegada: { type: Date, default: null },
     odometroChegada: { type: Number, default: null },
     observacoes: { type: String, default: '' },
-    status: { type: String, enum: ['ativo', 'concluido'], default: 'ativo' },
+    status: { type: String, enum: ['ativo', 'concluido', 'agendado'], default: 'ativo' },
   },
   { timestamps: true }
 );

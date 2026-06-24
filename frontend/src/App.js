@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar.js";
 import Topbar from "./components/Topbar.js";
+import Popup from "./components/Popup/Popup";
+import api from "./services/api";
+import { useEffect } from "react";
+
 import {
     BrowserRouter as Router,
     Routes,
@@ -35,7 +39,76 @@ const MainContent = styled.div`
     overflow: hidden;
 `;
 
+
 const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, nomeUsuario, setNomeUsuario }) => {
+    const [modalAberto, setModalAberto] = useState(false);
+    const [movimentoSelecionado, setMovimentoSelecionado] = useState(null);
+
+    useEffect(() => {
+        if (!isLoggedIn) return;
+
+        const verificarAgendamentos = async () => {
+            try {
+                const { data } = await api.get(
+                    "/movimentos/agendamentos-pendentes"
+                );
+
+                console.log("AGENDAMENTOS RECEBIDOS:", data);
+
+                if (
+                    data.length > 0 &&
+                    !modalAberto
+                ) {
+                    console.log("ABRINDO POPUP");
+
+                    setMovimentoSelecionado(data[0]);
+                    setModalAberto(true);
+                }
+
+            } catch (err) {
+                console.error(
+                    "Erro ao verificar agendamentos:",
+                    err
+                );
+            }
+        };
+
+        verificarAgendamentos();
+
+        const interval = setInterval(
+            verificarAgendamentos,
+            60000
+        );
+
+        return () => clearInterval(interval);
+    }, [isLoggedIn, modalAberto]);
+
+    const confirmarAgendamento = async (movimento) => {
+        try {
+            await api.post(
+                `/movimentos/${movimento._id}/confirmar-agendamento`
+            );
+
+            setModalAberto(false);
+            setMovimentoSelecionado(null);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const cancelarAgendamento = async (movimento) => {
+        try {
+            await api.delete(
+                `/movimentos/${movimento._id}/cancelar-agendamento`
+            );
+
+            setModalAberto(false);
+            setMovimentoSelecionado(null);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('nomeUsuario');
@@ -73,6 +146,13 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, no
                                     <Route path="/gerenciar" element={<Gerenciar />} />
                                 </Routes>
                             </MainContent>
+
+                            <Popup
+                                aberto={modalAberto}
+                                movimento={movimentoSelecionado}
+                                onConfirmar={confirmarAgendamento}
+                                onCancelar={cancelarAgendamento}
+                            />
                         </>
                     ) : (
                         <Navigate to="/login" />
