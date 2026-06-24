@@ -150,7 +150,7 @@ router.delete('/:id/cancelar-agendamento', async (req, res) => {
 router.post('/:id/confirmar-agendamento', async (req, res) => {
   try {
     const movimento = await Movimento.findById(req.params.id)
-      .populate('veiculo');
+      .populate('veiculo motorista');
 
     if (!movimento) {
       return res.status(404).json({
@@ -163,6 +163,9 @@ router.post('/:id/confirmar-agendamento', async (req, res) => {
 
     movimento.veiculo.status = 'Em uso';
     await movimento.veiculo.save();
+
+    movimento.motorista.status = 'Ocupado';
+    await movimento.motorista.save();
 
     res.json({
       message: 'Agendamento confirmado'
