@@ -32,7 +32,7 @@ const Saida = () => {
                     api.get('/veiculos'),
                     api.get('/motivos'),
                 ]);
-                setMotoristas(m.data);
+                setMotoristas(m.data.filter(item => item.status === 'Disponível'));
                 setVeiculos(v.data.filter(item => item.status === 'Disponível'));
                 setMotivos(mo.data);
             } catch {
@@ -61,7 +61,7 @@ const Saida = () => {
             veiculo: formData.veiculo,
             motorista: formData.motorista,
             motivo: formData.motivo, 
-            destino: formData.destino,
+            destino: formData.destino.trim() || "", 
             saida: formData.saida.toISOString(),
             retornoEstimado: formData.retornoEstimado.toISOString(),
         };
@@ -81,10 +81,13 @@ const Saida = () => {
                 saida: new Date(),
             });
             setSaidaManual(false);
+            
+            const respV = await api.get('/veiculos');
+            setVeiculos(respV.data.filter(v => v.status === 'Disponível'));
 
-            // Recarregar veículos disponíveis
-            const { data } = await api.get('/veiculos');
-            setVeiculos(data.filter(v => v.status === 'Disponível'));
+            const respM = await api.get('/motoristas');
+            setMotoristas(respM.data.filter(m => m.status === 'Disponível'));
+
         } catch (err) {
             console.error("Erro completo da requisição:", err.response);
             setErro(err.response?.data?.message || "Erro ao registrar saída no servidor.");
@@ -136,9 +139,9 @@ const Saida = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Destino da viagem:</label>
+                    <label>Destino da viagem <span style={{ fontWeight: "normal", fontSize: "0.9em", opacity: 0.7 }}>(Opcional)</span>:</label>
                     <input type="text" placeholder="Digite o destino" className="form-field"
-                        name="destino" value={formData.destino} onChange={handleChange} required />
+                        name="destino" value={formData.destino} onChange={handleChange}/>
                 </div>
 
                 <div className="form-group">

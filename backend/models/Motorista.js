@@ -7,6 +7,11 @@ const motoristaSchema = new mongoose.Schema(
     cargo: { type: String, default: '', trim: true },
     contato1: { type: String, required: true, trim: true },
     contato2: { type: String, default: '', trim: true },
+    status: {
+      type: String,
+      enum: ['Disponível', 'Ocupado'],
+      default: 'Disponível',
+    },
   },
   { timestamps: true }
 );

@@ -36,15 +36,6 @@ const Card = ({ data, onToggleManutencao }) => {
                     <p><strong>Odômetro:</strong> {data.odometro.toLocaleString()} km</p>
                 )}
             </div>
-
-            {podeAlterarManutencao && onToggleManutencao && (
-                <button
-                    className="btn-manutencao"
-                    onClick={() => onToggleManutencao(data)}
-                >
-                    {labelBotao}
-                </button>
-            )}
         </div>
     );
 };

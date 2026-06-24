@@ -1,6 +1,7 @@
 const express = require('express');
 const Movimento = require('../models/Movimento');
 const Veiculo = require('../models/Veiculo');
+const Motorista = require('../models/Motorista');
 const auth = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -8,16 +9,22 @@ router.use(auth);
 
 router.post('/', async (req, res) => {
   try {
-    const { veiculo: veiculoId, motorista, motivo, destino, saida, retornoEstimado } = req.body;
+    const { veiculo: veiculoId, motorista: motoristaId, motivo, destino, saida, retornoEstimado } = req.body;
 
     const veiculo = await Veiculo.findById(veiculoId);
-    if (!veiculo) return res.status(404).json({ message: 'Veículo não encontrado' });
-    if (veiculo.status !== 'Disponível') {
-      return res.status(400).json({ message: `Veículo não disponível (status: ${veiculo.status})` });
-    }
+    const motorista = await Motorista.findById(motoristaId);
 
+    if (!veiculo) return res.status(404).json({ message: 'Veículo não encontrado' });
+    if (!motorista) return res.status(404).json({ message: 'Motorista não encontrado' });
+    
+    if (veiculo.status !== 'Disponível')
+      return res.status(400).json({ message: `Veículo não disponível (status: ${veiculo.status})` });
+    if (motorista.status !== 'Disponível')
+      return res.status(400).json({ message: `Motorista ocupado (status: ${motorista.status})` });
+    
+    
     const movimento = new Movimento({
-      motorista,
+      motorista: motoristaId,
       veiculo: veiculoId,
       motivo,
       destino,
@@ -30,10 +37,12 @@ router.post('/', async (req, res) => {
 
     veiculo.status = 'Em uso';
     await veiculo.save();
+    motorista.status = 'Ocupado';
+    await motorista.save();
 
-    const populado = await Movimento.findById(movimento._id).populate('motorista veiculo motivo');
-    res.status(201).json(populado);
+    res.status(201).json(movimento);
   } catch (err) {
+    console.error("ERRO MOVIMENTOS:", err);
     res.status(400).json({ message: err.message });
   }
 });
@@ -83,7 +92,7 @@ router.post('/:id/chegada', async (req, res) => {
   try {
     const { dataChegada, odometroChegada, observacoes } = req.body;
 
-    const movimento = await Movimento.findById(req.params.id).populate('veiculo');
+    const movimento = await Movimento.findById(req.params.id).populate('veiculo motorista');
     if (!movimento) return res.status(404).json({ message: 'Movimentação não encontrada' });
     if (movimento.status === 'concluido') {
       return res.status(400).json({ message: 'Movimentação já concluída' });
@@ -99,6 +108,10 @@ router.post('/:id/chegada', async (req, res) => {
     veiculo.odometro = Number(odometroChegada);
     veiculo.status = 'Disponível';
     await veiculo.save();
+
+    const motorista = movimento.motorista;
+    motorista.status = 'Disponível';
+    await motorista.save();
 
     const populado = await Movimento.findById(movimento._id).populate('motorista veiculo motivo');
     res.json(populado);
