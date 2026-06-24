@@ -11,6 +11,17 @@
     justify-self: center;
 }
 
+.input-error {
+    border: 2px solid #dc3545 !important;
+    color: #dc3545;
+}
+
+.error-text {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
 .gerenciar .categorias {
     width: 100%;
 

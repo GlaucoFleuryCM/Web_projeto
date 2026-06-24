@@ -20,6 +20,45 @@ const Gerenciar = () => {
     const [veicImg, setVeicImg] = useState(null);
     const [motivoForm, setMotivoForm] = useState({ motivo: "" });
 
+    const validarCPF = (cpf) => {
+        cpf = cpf.replace(/\D/g, "");
+
+        if (cpf.length !== 11) return false;
+
+        if (/^(\d)\1+$/.test(cpf)) return false;
+
+        let soma = 0;
+
+        for (let i = 0; i < 9; i++) {
+            soma += Number(cpf[i]) * (10 - i);
+        }
+
+        let resto = (soma * 10) % 11;
+        if (resto === 10) resto = 0;
+
+        if (resto !== Number(cpf[9])) return false;
+
+        soma = 0;
+
+        for (let i = 0; i < 10; i++) {
+            soma += Number(cpf[i]) * (11 - i);
+        }
+
+        resto = (soma * 10) % 11;
+        if (resto === 10) resto = 0;
+
+        return resto === Number(cpf[10]);
+    };
+
+    const validarPlaca = (placa) => {
+        placa = placa.toUpperCase();
+
+        const antiga = /^[A-Z]{3}[0-9]{4}$/;
+        const mercosul = /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/;
+
+        return antiga.test(placa) || mercosul.test(placa);
+    };
+
     const mostrarSucesso = (msg) => {
         setSucesso(msg);
         setTimeout(() => setSucesso(""), 3000);
@@ -52,6 +91,12 @@ const Gerenciar = () => {
     }, [carregarDados]);
 
     const handleSubmitMotorista = async (e) => {
+
+        if (!validarCPF(motoForm.cpf)) {
+            setErro("CPF inválido.");
+            return;
+        }
+
         e.preventDefault();
         setErro("");
         try {
@@ -65,6 +110,12 @@ const Gerenciar = () => {
     };
 
     const handleSubmitVeiculo = async (e) => {
+
+        if (!validarPlaca(veicForm.placa)) {
+            setErro("Placa inválida.");
+            return;
+        }
+
         e.preventDefault();
         setErro("");
         try {
@@ -127,6 +178,12 @@ const Gerenciar = () => {
         }
     };
 
+    const cpfValido =
+        motoForm.cpf === "" || validarCPF(motoForm.cpf);
+
+    const placaValida =
+        veicForm.placa === "" || validarPlaca(veicForm.placa);
+
     return (
         <div className="gerenciar">
             <h1 className="page-title">Cadastrar ou Remover Itens</h1>
@@ -150,8 +207,23 @@ const Gerenciar = () => {
                         </div>
                         <div className="form-group">
                             <label>*CPF:</label>
-                            <input type="text" placeholder="000.000.000-00" className="form-field" required
-                                value={motoForm.cpf} onChange={(e) => setMotoForm(p => ({ ...p, cpf: e.target.value }))} />
+                            <input
+                                type="text"
+                                placeholder="000.000.000-00"
+                                className={`form-field ${!cpfValido ? "input-error" : ""}`}
+                                required
+                                value={motoForm.cpf}
+                                onChange={(e) =>
+                                    setMotoForm(p => ({ ...p, cpf: e.target.value }))
+                                }
+                            />
+
+                            {!cpfValido && (
+                                <small className="error-text">
+                                    CPF inválido
+                                </small>
+                            )}
+
                         </div>
                         <div className="form-group">
                             <label>Cargo:</label>
@@ -186,8 +258,23 @@ const Gerenciar = () => {
                     <form onSubmit={handleSubmitVeiculo}>
                         <div className="form-group">
                             <label>*Placa:</label>
-                            <input type="text" placeholder="ABC1D23" className="form-field" required
-                                value={veicForm.placa} onChange={(e) => setVeicForm(p => ({ ...p, placa: e.target.value }))} />
+                            <input
+                                type="text"
+                                placeholder="ABC1D23"
+                                className={`form-field ${!placaValida ? "input-error" : ""}`}
+                                required
+                                value={veicForm.placa}
+                                onChange={(e) =>
+                                    setVeicForm(p => ({ ...p, placa: e.target.value }))
+                                }
+                            />
+
+                            {!placaValida && (
+                                <small className="error-text">
+                                    Placa inválida
+                                </small>
+                            )}
+
                         </div>
                         <div className="form-group">
                             <label>*Modelo:</label>
