@@ -49,22 +49,18 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, no
 
         const verificarAgendamentos = async () => {
             try {
+                
                 const { data } = await api.get(
                     "/movimentos/agendamentos-pendentes"
                 );
-
-                console.log("AGENDAMENTOS RECEBIDOS:", data);
 
                 if (
                     data.length > 0 &&
                     !modalAberto
                 ) {
-                    console.log("ABRINDO POPUP");
-
                     setMovimentoSelecionado(data[0]);
                     setModalAberto(true);
                 }
-
             } catch (err) {
                 console.error(
                     "Erro ao verificar agendamentos:",
