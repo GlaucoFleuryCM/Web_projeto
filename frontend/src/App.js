@@ -7,19 +7,17 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
+    Navigate,
 } from "react-router-dom";
 import {
     LogRecente,
     LogGeral,
 } from "./pages/Logs/Logs.jsx";
-import { useLocation, Navigate } from "react-router-dom";
 
 import Saida from "./pages/Saida/RegSaida.jsx";
 import Veiculos from "./pages/Veiculos/Veiculos.jsx";
-import LoginPage from "./login_page/LoginPage.jsx";
+import LoginPage from "./pages/Login/LoginPage.jsx";
 import Gerenciar from "./pages/Gerenciar/Gerenciar.jsx";
-
-import logo from "./assets/logo.png";
 
 const MainContent = styled.div`
     margin-left: ${({ sidebarOpen }) => sidebarOpen ? "250px" : "80px"};
@@ -35,10 +33,16 @@ const MainContent = styled.div`
     overflow: hidden;
 `;
 
-const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, nomeUsuario, setNomeUsuario }) => {
+const AppContent = ({ 
+    sidebarOpen, setSidebarOpen, 
+    isLoggedIn, setIsLoggedIn, 
+    nomeUsuario, setNomeUsuario, 
+    role 
+}) => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('nomeUsuario');
+        localStorage.removeItem('role');
         setIsLoggedIn(false);
         setNomeUsuario('');
     };
@@ -62,6 +66,7 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, no
                             <Sidebar
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={setSidebarOpen}
+                                role={role}
                             />
 
                             <MainContent sidebarOpen={sidebarOpen}>
@@ -70,7 +75,11 @@ const AppContent = ({ sidebarOpen, setSidebarOpen, isLoggedIn, setIsLoggedIn, no
                                     <Route path="/logs/geral" element={<LogGeral />} />
                                     <Route path="/saida" element={<Saida />} />
                                     <Route path="/veiculos" element={<Veiculos />} />
-                                    <Route path="/gerenciar" element={<Gerenciar />} />
+                                    <Route path="/gerenciar"  element={
+                                        role == 'adm'
+                                            ? <Gerenciar />
+                                            : <Navigate to="/veiculos" />
+                                    } />
                                 </Routes>
                             </MainContent>
                         </>
@@ -87,6 +96,7 @@ function App() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
     const [nomeUsuario, setNomeUsuario] = useState(localStorage.getItem('nomeUsuario') || '');
+    const role = localStorage.getItem('role');
 
     return (
         <Router>
@@ -97,6 +107,7 @@ function App() {
                 setIsLoggedIn={setIsLoggedIn}
                 nomeUsuario={nomeUsuario}
                 setNomeUsuario={setNomeUsuario}
+                role={role}
             />
         </Router>
     );

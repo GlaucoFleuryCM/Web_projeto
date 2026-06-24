@@ -12,9 +12,19 @@ async function seed() {
   await User.deleteMany({});
   await User.create({
     username: 'Severino Manoel da Silva Neto',
+    email: 'severinomsn@gmail.com',
     password: '1234',
     nome: 'Severino Manoel da Silva Neto',
   });
+
+  await User.create({
+    username: 'Recar',
+    email: 'renanbcatarin@gmail.com',
+    password: 'segredo',
+    nome: 'Renan',
+    role: 'adm',
+  })
+
   console.log('Usuário criado: Severino Manoel da Silva Neto / 1234');
 
   const motoristasExist = await Motorista.countDocuments();

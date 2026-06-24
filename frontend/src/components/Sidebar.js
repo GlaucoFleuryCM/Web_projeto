@@ -35,7 +35,7 @@ const SidebarWrap = styled.div`
     padding: 1rem 0;
 `;
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen, role }) => {
     return (
         <>
             <IconContext.Provider value={{ color: "#fff" }}>
@@ -44,15 +44,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     onMouseLeave={() => setSidebarOpen(false)}
                 >
                     <SidebarWrap>
-                        {SidebarData.map((item, index) => {
-                            return (
+                        {SidebarData
+                            .filter(item =>
+                                role == "adm" ||
+                                item.path !== "/gerenciar"
+                            )
+                            .map((item, index) => (
                                 <SubMenu
                                     item={item}
                                     key={index}
                                     sidebarOpen={sidebarOpen}
                                 />
-                            );
-                        })}
+                        ))}
                     </SidebarWrap>
                 </SidebarNav>
             </IconContext.Provider>

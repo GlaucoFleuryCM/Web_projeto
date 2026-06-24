@@ -18,12 +18,19 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, nome: user.nome },
+      { id: user._id, 
+        nome: user.nome,
+        role: user.role
+      },
       process.env.JWT_SECRET || 'secret',
       { expiresIn: '8h' }
     );
 
-    res.json({ token, nome: user.nome });
+    res.json({
+      token,
+      nome: user.nome,
+      role: user.role
+    });
   } catch (err) {
     res.status(500).json({ message: 'Erro interno do servidor' });
   }

@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     color: white;
-    background-image: url(../assets/fundo_login.jpg);
+    background-image: url(../../assets/fundo_login.jpg);
     background-size: cover;     
     background-position: center; 
     background-repeat: no-repeat;  

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 import "./LoginPage.css";
 
 const LoginPage = ({ setIsLoggedIn, setNomeUsuario }) => {
@@ -21,6 +21,8 @@ const LoginPage = ({ setIsLoggedIn, setNomeUsuario }) => {
             const { data } = await api.post('/auth/login', { username, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('nomeUsuario', data.nome);
+            localStorage.setItem('role', data.role);
+
             setNomeUsuario(data.nome);
             setIsLoggedIn(true);
             navigate("/veiculos");
