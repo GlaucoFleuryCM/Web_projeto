@@ -64,6 +64,7 @@ const Saida = () => {
             destino: formData.destino.trim() || "", 
             saida: formData.saida.toISOString(),
             retornoEstimado: formData.retornoEstimado.toISOString(),
+            agendado: saidaManual,
         };
 
         try {

@@ -3,13 +3,14 @@ const Movimento = require('../models/Movimento');
 const Veiculo = require('../models/Veiculo');
 const Motorista = require('../models/Motorista');
 const auth = require('../middleware/authMiddleware');
+const { verificarAgendamentos } = require('../services/agendamentoService');
 
 const router = express.Router();
 router.use(auth);
 
 router.post('/', async (req, res) => {
   try {
-    const { veiculo: veiculoId, motorista: motoristaId, motivo, destino, saida, retornoEstimado } = req.body;
+    const { veiculo: veiculoId, motorista: motoristaId, motivo, destino, saida, retornoEstimado, agendado } = req.body;
 
     const veiculo = await Veiculo.findById(veiculoId);
     const motorista = await Motorista.findById(motoristaId);
@@ -31,14 +32,17 @@ router.post('/', async (req, res) => {
       saida: new Date(saida),
       retornoEstimado: new Date(retornoEstimado),
       odometroSaida: veiculo.odometro,
+      status: agendado ? 'agendado' : 'ativo',
     });
 
     await movimento.save();
 
-    veiculo.status = 'Em uso';
-    await veiculo.save();
-    motorista.status = 'Ocupado';
-    await motorista.save();
+    if (!agendado) {
+      veiculo.status = 'Em uso';
+      await veiculo.save();
+      motorista.status = 'Ocupado';
+      await motorista.save();
+    }
 
     res.status(201).json(movimento);
   } catch (err) {
@@ -118,6 +122,70 @@ router.post('/:id/chegada', async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
+});
+
+router.delete('/:id/cancelar-agendamento', async (req, res) => {
+  try {
+    const movimento = await Movimento.findById(req.params.id);
+
+    if (!movimento) {
+      return res.status(404).json({
+        message: 'Movimentação não encontrada'
+      });
+    }
+
+    await movimento.deleteOne();
+
+    res.json({
+      message: 'Agendamento cancelado'
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+});
+
+router.post('/:id/confirmar-agendamento', async (req, res) => {
+  try {
+    const movimento = await Movimento.findById(req.params.id)
+      .populate('veiculo');
+
+    if (!movimento) {
+      return res.status(404).json({
+        message: 'Movimentação não encontrada'
+      });
+    }
+
+    movimento.status = 'ativo';
+    await movimento.save();
+
+    movimento.veiculo.status = 'Em uso';
+    await movimento.veiculo.save();
+
+    res.json({
+      message: 'Agendamento confirmado'
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    });
+  }
+});
+
+router.get('/agendamentos-pendentes', async (req, res) => {
+    try {
+        const movimentos = await verificarAgendamentos();
+
+        res.json(movimentos);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: 'Erro ao verificar agendamentos'
+        });
+    }
 });
 
 module.exports = router;
