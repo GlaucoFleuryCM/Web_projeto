@@ -50,7 +50,8 @@ const Veiculos = () => {
     const statusOrder = { "Em uso": 1, "Manutenção": 2, "Disponível": 3, "Indisponível": 4 };
 
     const slides = veiculos
-        .filter((v) => v.placa.toLowerCase().includes(search.toLowerCase()))
+        .filter((v) => (v.placa.toLowerCase().includes(search.toLowerCase()) ||
+                        v.modelo.toLowerCase().includes(search.toLowerCase())))
         .sort((a, b) => (statusOrder[a.status] || 5) - (statusOrder[b.status] || 5))
         .map(toSlide);
 
@@ -59,7 +60,7 @@ const Veiculos = () => {
             <div className="search-container">
                 <input
                     type="text"
-                    placeholder="Buscar pela placa"
+                    placeholder="Buscar por Placa ou Modelo"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="search-bar"
