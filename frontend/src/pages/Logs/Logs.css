@@ -52,7 +52,6 @@
 }
 
 .table-wrapper table td {
-    background-color: rgb(228, 236, 255);
     color: black;
     text-align: center;
     border: 1px solid var(--azul-calmart);
@@ -73,6 +72,14 @@
     text-align: center;
     border: 1px solid var(--azul-calmart);
     padding: 5px;
+}
+
+.table-wrapper table tbody tr:nth-child(odd) td {
+    background: #EDF3FF;
+}
+
+.table-wrapper table tbody tr:nth-child(even) td {
+    background: #DDE8FF;
 }
 
 #container-tabelas {
