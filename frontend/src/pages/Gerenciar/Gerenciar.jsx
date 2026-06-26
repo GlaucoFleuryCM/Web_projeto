@@ -24,7 +24,7 @@ const Gerenciar = () => {
 
     const [popupAberto, setPopupAberto] = useState(false);
     const [dadosPopup, setDadosPopup] = useState([]);
-
+    
     const validarCPF = (cpf) => {
         cpf = cpf.replace(/\D/g, "");
 
