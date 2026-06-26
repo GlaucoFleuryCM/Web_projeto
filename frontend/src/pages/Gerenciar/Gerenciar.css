@@ -86,7 +86,7 @@
     gap: 4rem;
 }
 
-.gerenciar .vizualização {
+.gerenciar .vizualizacao {
     width: 350px;
     list-style: none;
     padding: 0 10px 0 0;
@@ -100,7 +100,7 @@
     padding-right: 8px;
 }
 
-.gerenciar .vizualização li {
+.gerenciar .vizualizacao li {
     background-color: var(--branco);
     border: 3px solid #e0e0e0;
     border-radius: 5px;
@@ -114,26 +114,52 @@
     justify-content: space-between;
 }
 
-.gerenciar .vizualização li:hover {
+.gerenciar .vizualizacao li:hover {
     border-color: #79729f;
     background-color: #dcdcfe; 
 }
 
+.gerenciar .vizualizacao .btns {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.gerenciar .view-btn,
 .gerenciar .delete-btn {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: transparent;
     border: none;
-    color: #8b0101;
-    font-size: 1.5rem;
-    font-weight: bold;
     cursor: pointer;
-    line-height: 1;
-    transition: transform 0.2s, color 0.2s;
+    padding: 0;
+
+    transition: transform .2s, opacity .2s;
+}
+
+.gerenciar .view-btn {
+    font-size: 1.35rem;
+}
+
+.gerenciar .delete-btn {
+    font-size: 1.6rem;
+    color: #8b0101;
+    font-weight: bold;
+}
+
+.gerenciar .view-btn:hover,
+.gerenciar .delete-btn:hover {
+    transform: scale(1.15);
 }
 
 .gerenciar .delete-btn:hover {
     color: #ff0000;
 }
-
 
 .gerenciar button {
     color: black;
@@ -146,6 +172,7 @@
     justify-content: center;
     gap: 1.5rem
 }
+
 
 @media (max-width: 800px) {
 
@@ -213,12 +240,12 @@
         box-sizing: border-box;
     }
 
-    .gerenciar .vizualização {
+    .gerenciar .vizualizacao {
         width: 100%;
         max-height: 300px;
     }
 
-    .gerenciar .vizualização li {
+    .gerenciar .vizualizacao li {
         padding: 0.8rem;
         font-size: 0.95rem;
     }

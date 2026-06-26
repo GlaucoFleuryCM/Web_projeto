@@ -1,0 +1,14 @@
+.gerenciar .popup-row{
+    display:flex;
+    justify-content:space-between;
+    margin:12px 0;
+    gap:40px;
+}
+
+.gerenciar .popup-label{
+    font-weight:bold;
+}
+
+.gerenciar .popup-value{
+    color:#444;
+}
